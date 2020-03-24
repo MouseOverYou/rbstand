@@ -11,17 +11,71 @@ var createScene = function () {
     var scene = new BABYLON.Scene(engine);
 
     // Add a camera to the scene and attach it to the canvas
-    var camera = new BABYLON.ArcRotateCamera("Camera", 0.57, 1.03, 2, new BABYLON.Vector3(0, 1.5, 0), scene);
+    var camera = new BABYLON.ArcRotateCamera("Camera", 90*(Math.PI/180), 90*(Math.PI/180), 2.5, new BABYLON.Vector3(0, 2, 0), scene);
+    camera.minZ = 0.1
     camera.attachControl(canvas, true);
     var assetsManager = new BABYLON.AssetsManager(scene)
     LoadAssets(scene, assetsManager)
 
-    mainLight = new BABYLON.DirectionalLight("mainLight", new BABYLON.Vector3(0,-1, 0.45), scene);
-    mainLight.position = new BABYLON.Vector3(0,4,0);
-    mainLight.intensity = 0
+    mainLight = new BABYLON.DirectionalLight("mainLight", new BABYLON.Vector3(1,-90, -180), scene);
+    mainLight.position = new BABYLON.Vector3(0,2,0);
+    mainLight.intensity = 1.5
 
     var pointLight = new BABYLON.PointLight("pointLight", new BABYLON.Vector3(0.005,2.29,0), scene);
-    pointLight.intensity =0.05
+    pointLight.intensity =0.00
+
+    	// Sky material
+	var skyboxMaterial = new BABYLON.SkyMaterial("skyMaterial", scene);
+    skyboxMaterial.backFaceCulling = false;
+    skyboxMaterial.cameraOffset.y = 50;
+    skyboxMaterial.luminance = 0.05;
+	//skyboxMaterial._cachedDefines.FOG = true;
+
+	// Sky mesh (box)
+    var skybox = BABYLON.Mesh.CreateBox("skyBox", 1000.0, scene);
+    skybox.material = skyboxMaterial;
+
+    	/*
+	* Keys:
+	* - 1: Day
+	* - 2: Evening
+	* - 3: Increase Luminance
+	* - 4: Decrease Luminance
+	* - 5: Increase Turbidity
+	* - 6: Decrease Turbidity
+    * - 7: Move horizon to -50
+    * - 8: Restore horizon to 0
+	*/
+	var setSkyConfig = function (property, from, to) {
+		var keys = [
+            { frame: 0, value: from },
+			{ frame: 100, value: to }
+        ];
+		
+		var animation = new BABYLON.Animation("animation", property, 100, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+		animation.setKeys(keys);
+		
+		scene.stopAnimation(skybox);
+		scene.beginDirectAnimation(skybox, [animation], 0, 100, false, 1);
+	};
+	
+	window.addEventListener("keydown", function (evt) {
+		switch (evt.keyCode) {
+			case 49: setSkyConfig("material.inclination", skyboxMaterial.inclination, 0); break; // 1
+			case 50: setSkyConfig("material.inclination", skyboxMaterial.inclination, -0.5); break; // 2
+
+			case 51: setSkyConfig("material.luminance", skyboxMaterial.luminance, 0.1); break; // 3
+			case 52: setSkyConfig("material.luminance", skyboxMaterial.luminance, 1.0); break; // 4
+			
+			case 53: setSkyConfig("material.turbidity", skyboxMaterial.turbidity, 40); break; // 5
+			case 54: setSkyConfig("material.turbidity", skyboxMaterial.turbidity, 5); break; // 6
+			
+            case 55: setSkyConfig("material.cameraOffset.y", skyboxMaterial.cameraOffset.y, 50); break; // 7
+            case 56: setSkyConfig("material.cameraOffset.y", skyboxMaterial.cameraOffset.y, 0); break;  // 8
+			default: break;
+		}
+    });
+	
 
     /*
     fillLight = new BABYLON.DirectionalLight("fillLight", new BABYLON.Vector3(0,2, 0), scene);
@@ -29,9 +83,7 @@ var createScene = function () {
     fillLight.intensity = 0.1
     */
 
-    // Add lights to the scene
-    var gl = new BABYLON.GlowLayer("glow", scene) //glow layer 
-    gl.intensity = 1
+
 
     //var ssao = new BABYLON.SSAORenderingPipeline('ssaopipeline', scene, 0.75, camera);
 
@@ -49,7 +101,7 @@ var createScene = function () {
             /* tone mapping*/
             defaultPipeline.imageProcessing.toneMappingEnabled = true
             defaultPipeline.imageProcessing.toneMappingType = 1
-            defaultPipeline.imageProcessing.contrast = 1.4; // 1 by default
+            defaultPipeline.imageProcessing.contrast = 1.8; // 1 by default
             defaultPipeline.imageProcessing.exposure = 1; // 1 by default
             /* vignette */
             defaultPipeline.imageProcessing.vignetteEnabled =true
@@ -156,7 +208,7 @@ var createScene = function () {
 /******* End of the create scene function ******/
 
 var scene = createScene(); //Call the createScene function
-//scene.debugLayer.show();
+scene.debugLayer.show();
 
 // Register a render loop to repeatedly render the scene
 engine.runRenderLoop(function () {

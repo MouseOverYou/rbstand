@@ -11,11 +11,12 @@ function LoadAssets(scene, assetsManager) {
     envTask.onSuccess = function (task) {
         //alert('HDR LOADED');
         hdrTexture = new BABYLON.CubeTexture.CreateFromPrefilteredData("./assets/environment.dds", scene);
+        hdrTexture.rotationY = 140*(Math.PI/180);
 
         // Create Skybox
         var hdrSkybox = BABYLON.Mesh.CreateBox("hdrSkyBox", 1000.0, scene);
-        hdrSkybox.visibility = 1
-        var hdrSkyboxMaterial = new BABYLON.PBRMaterial("skyBox", scene);
+        hdrSkybox.visibility = 0
+        var hdrSkyboxMaterial = new BABYLON.PBRMaterial("hdrSkyBox", scene);
         hdrSkyboxMaterial.backFaceCulling = false;
         hdrSkyboxMaterial.microSurface = 1.0;
         hdrSkyboxMaterial.disableLighting = true;
@@ -28,7 +29,7 @@ function LoadAssets(scene, assetsManager) {
     }
 
     Messe_P = new BABYLON.TransformNode("Messe_P");
-    MesseLoaderTask = assetsManager.addMeshTask("", "", "./assets/erase me.glb")
+    MesseLoaderTask = assetsManager.addMeshTask("", "", "./assets/3dstand_v4.glb")
 
     MesseLoaderTask.onSuccess = function (task) {
         
@@ -55,6 +56,8 @@ function LoadAssets(scene, assetsManager) {
         scene.materials.forEach(mat => {
             mat.reflectionTexture = hdrTexture;
         });
+        ChangeMaterials();
+        AddGlow();
                 /*
         AddShadows()
 

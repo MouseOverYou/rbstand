@@ -1,11 +1,51 @@
 function ChangeMaterials() {
 
-    var redNagel =new BABYLON.Color3.FromHexString("#510002")
-    var blackNagel =new BABYLON.Color3.FromHexString("#131313")
+    var redBay =new BABYLON.Color3.FromHexString("#d8575");
+    var blueBay =new BABYLON.Color3.FromHexString("#0c83e2");
+    var lightGrayBay = new BABYLON.Color3.FromHexString("#eeeeee");
+    var darkGrayBay = new BABYLON.Color3.FromHexString("#323334");
+    var blackBay = new BABYLON.Color3.FromHexString("#000000");
+
+    var screenTex = new BABYLON.Texture("./assets/ascree.jpg", scene, true, false)
+    var perlinText = new BABYLON.NoiseProceduralTexture("perlin", 254, scene);
+
+    scene.getMaterialByName("leuchteMat").albedoColor = lightGrayBay;
+
+    scene.getMaterialByName("screensMat").emissiveTexture = screenTex
+    scene.getMaterialByName("screensMat").emissiveColor = new BABYLON.Color3.FromHexString("#ffffff")
+    scene.getMaterialByName("screensMat").metallic = 0
+    scene.getMaterialByName("screensMat").roughness = 0
+
+    scene.getMaterialByName("bGrayGloss").albedoColor = darkGrayBay;
+    scene.getMaterialByName("bGrayGloss").metallic = 0.5
+    scene.getMaterialByName("bGrayGloss").roughness = 0.12
+
+    scene.getMaterialByName("bayLightGloss").metallic = 0.2
+    scene.getMaterialByName("bayLightGloss").roughness = 0.12
+
+    scene.getMaterialByName("glassMat").albedoColor = lightGrayBay
+    scene.getMaterialByName("glassMat").alpha = 0.5
+    scene.getMaterialByName("glassMat").metallic = 0
+    scene.getMaterialByName("glassMat").roughness = 0
+
+    scene.getMaterialByName("Metal").albedoColor = lightGrayBay
+    scene.getMaterialByName("Metal").metallic = 1
+    scene.getMaterialByName("Metal").roughness = 0.5
+
+    scene.getMaterialByName("frauMat").metallic = 0;
+    scene.getMaterialByName("frauMat").roughness = 1;
+
+    scene.getMaterialByName("flageMatMediumMat").albedoTexture.vOffset = 0.08;
+    scene.getMaterialByName("flageMatMediumMat").roughness = 1;
+    scene.getMaterialByName("flageMatLargeMat").roughness = 1;
+
+    scene.getMaterialByName("leatherWhiteMat").metallic = 0.2
+    scene.getMaterialByName("leatherWhiteMat").roughness = 0.15
+    
 
     /*    var metalTex = new BABYLON.Texture("/assets/metal_tex.jpg", scene, true, false)
     metalTex.uScale = 10
-    metalTex.vScale = 5*/
+    metalTex.vScale = 5
     scene.getMaterialByName("bodyEdges").albedoColor = redNagel
     scene.getMaterialByName("bodyEdges").metallic = 1
     scene.getMaterialByName("bodyEdges").roughness = 0.3
@@ -144,7 +184,7 @@ function ChangeMaterials() {
     scene.getMaterialByName("startMat").roughness = 0.0
     scene.getMaterialByName("startMat").emissiveColor = new BABYLON.Color3.FromHexString("#373737")
     scene.getMaterialByName("startMat").reflectionTexture = hdrTexture
-    //scene.getMaterialByName("arrowMat").alpha = 0 //start alpha
+    //scene.getMaterialByName("arrowMat").alpha = 0 //start alpha*/
 }
 
 function ChangeRenderingOrder() {
@@ -215,4 +255,16 @@ function AddShadows() {
 
 
     
+}
+
+function AddGlow(){
+        // Add lights to the scene
+        var gl = new BABYLON.GlowLayer("glow", scene) //glow layer 
+        gl.intensity = 0.85;
+        scene.meshes.forEach(elem => {
+            if(elem.name.startsWith("Screen_")){
+                gl.addExcludedMesh(elem)
+            }
+        });
+
 }
