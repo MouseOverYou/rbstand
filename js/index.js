@@ -13,6 +13,8 @@ var createScene = function () {
     // Add a camera to the scene and attach it to the canvas
     var camera = new BABYLON.ArcRotateCamera("Camera", 90*(Math.PI/180), 90*(Math.PI/180), 2.5, new BABYLON.Vector3(0, 2, 0), scene);
     camera.minZ = 0.1
+    camera.lowerRadiusLimit = 1
+    camera.upperRadiusLimit = 2
     camera.attachControl(canvas, true);
     var assetsManager = new BABYLON.AssetsManager(scene)
     LoadAssets(scene, assetsManager)
