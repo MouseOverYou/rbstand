@@ -208,7 +208,7 @@ var createScene = function () {
 /******* End of the create scene function ******/
 
 var scene = createScene(); //Call the createScene function
-scene.debugLayer.show();
+//scene.debugLayer.show();
 
 // Register a render loop to repeatedly render the scene
 engine.runRenderLoop(function () {
