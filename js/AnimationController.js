@@ -1,5 +1,15 @@
 var particleSystem, emitterReveal, swooshParticles,rainSystem, loseParticles
 
+function TriggeroopAnimations(){
+
+    if(SceneStarted){
+        HS_P.getChildren().forEach(elem => {
+            elem.rotation.y += 0.005;
+        });
+    }
+
+}
+
 function createWinParticles() {
 
     // Emitters

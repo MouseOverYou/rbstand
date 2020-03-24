@@ -11,10 +11,13 @@ var createScene = function () {
     var scene = new BABYLON.Scene(engine);
 
     // Add a camera to the scene and attach it to the canvas
-    var camera = new BABYLON.ArcRotateCamera("Camera", 90*(Math.PI/180), 90*(Math.PI/180), 2.5, new BABYLON.Vector3(0, 2, 0), scene);
+    var camera = new BABYLON.ArcRotateCamera("Camera", 90*(Math.PI/180), 82*(Math.PI/180), 2.8, new BABYLON.Vector3(0, 0, 0), scene);
     camera.minZ = 0.1
     camera.lowerRadiusLimit = 1
-    camera.upperRadiusLimit = 2
+    camera.upperRadiusLimit = 2.8
+    camera.angularSensibilityX = 3000
+    camera.angularSensibilityy = 3000
+    camera.wheelPrecision = 100
     camera.attachControl(canvas, true);
     var assetsManager = new BABYLON.AssetsManager(scene)
     LoadAssets(scene, assetsManager)
@@ -215,6 +218,7 @@ var scene = createScene(); //Call the createScene function
 // Register a render loop to repeatedly render the scene
 engine.runRenderLoop(function () {
     scene.render();
+    TriggeroopAnimations()
     var fpsLabel = document.getElementById("fpsLabel");
     fpsLabel.innerHTML = engine.getFps().toFixed() + " fps";
 });

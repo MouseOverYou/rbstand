@@ -9,6 +9,8 @@ function ChangeMaterials() {
     var screenTex = new BABYLON.Texture("./assets/ascree.jpg", scene, true, false)
     var perlinText = new BABYLON.NoiseProceduralTexture("perlin", 254, scene);
 
+    //icons
+    scene.getMaterialByName("iconMatGlass").alpha = 0.9
     scene.getMaterialByName("leuchteMat").albedoColor = lightGrayBay;
 
     scene.getMaterialByName("screensMat").emissiveTexture = screenTex
@@ -266,5 +268,25 @@ function AddGlow(){
                 gl.addExcludedMesh(elem)
             }
         });
+
+}
+
+function SpawnHotspots(){
+    let counter = 0;
+    let Hs_Clones = []
+    //TO DO: ALL LOOPS IN ONE
+    scene.meshes.forEach(elem => {
+        if(elem.name.startsWith("Hotspot_")){
+            elem.setEnabled(false)
+            counter ++;
+            var clone = HSIconTask.loadedMeshes[0].instantiateHierarchy(HS_P, undefined, (source, clone) => {
+                //clone.position = elem.position;
+                clone.scaling = new BABYLON.Vector3(1, 1, 1);
+            })
+            clone.position = elem.position;
+            clone.rotation = BABYLON.Quaternion.FromEulerAngles(0, Math.random() * 2 * Math.PI, 0);
+            clone.name = "HS Clone " + counter
+        }
+    });
 
 }

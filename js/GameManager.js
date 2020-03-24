@@ -1,4 +1,5 @@
 var lightAnimController
+var SceneStarted = false;
 
 function createUI() {
     myGUI = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");

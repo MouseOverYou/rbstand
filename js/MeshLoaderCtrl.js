@@ -1,7 +1,7 @@
 var slot_P, Messe_P
 var hdrTexture
 var SceneMeshes
-var slotMeshTask, startMeshTask, sphere, MesseLoaderTask
+var slotMeshTask, startMeshTask, sphere, MesseLoaderTask, HSIconTask, HS_P
 
 function LoadAssets(scene, assetsManager) {
 
@@ -34,7 +34,7 @@ function LoadAssets(scene, assetsManager) {
     MesseLoaderTask.onSuccess = function (task) {
         
         task.loadedMeshes[0].position.x = 0
-        task.loadedMeshes[0].position.y = 550
+        task.loadedMeshes[0].position.y = 0
         task.loadedMeshes[0].position.z = 0
         task.loadedMeshes[0].parent = Messe_P
         Messe_P.position.x = 0
@@ -44,6 +44,26 @@ function LoadAssets(scene, assetsManager) {
     }
 
     MesseLoaderTask.onError = function (task, message, exception) {
+        console.log(message, exception);
+    }
+
+    HS_P = new BABYLON.TransformNode("HS_P");
+    HSIconTask = assetsManager.addMeshTask("", "", "./assets/HS_Icon.glb")
+
+    HSIconTask.onSuccess = function (task) {
+        
+        task.loadedMeshes[0].position.x = 0
+        task.loadedMeshes[0].position.y = 0
+        task.loadedMeshes[0].position.z = 0
+        task.loadedMeshes[0].parent = HS_P
+        task.loadedMeshes[0].setEnabled(false)
+        HS_P.position.x = 0
+        HS_P.position.y = 0
+        HS_P.scaling = new BABYLON.Vector3(0.003, 0.003, 0.003)
+
+    }
+
+    HSIconTask.onError = function (task, message, exception) {
         console.log(message, exception);
     }
 
@@ -58,6 +78,8 @@ function LoadAssets(scene, assetsManager) {
         });
         ChangeMaterials();
         AddGlow();
+        SpawnHotspots()
+        SceneStarted = true;
                 /*
         AddShadows()
 
