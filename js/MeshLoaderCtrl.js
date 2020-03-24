@@ -6,11 +6,11 @@ var slotMeshTask, startMeshTask, sphere, MesseLoaderTask
 function LoadAssets(scene, assetsManager) {
 
     //ENV TASK
-    var envTask = assetsManager.addCubeTextureTask("envTask", "/assets/environment.dds");
+    var envTask = assetsManager.addCubeTextureTask("envTask", "./assets/environment.dds");
 
     envTask.onSuccess = function (task) {
         //alert('HDR LOADED');
-        hdrTexture = new BABYLON.CubeTexture.CreateFromPrefilteredData("/assets/environment.dds", scene);
+        hdrTexture = new BABYLON.CubeTexture.CreateFromPrefilteredData("./assets/environment.dds", scene);
 
         // Create Skybox
         var hdrSkybox = BABYLON.Mesh.CreateBox("hdrSkyBox", 1000.0, scene);
