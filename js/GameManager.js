@@ -12,8 +12,8 @@ function SpawnInfobox(mesh, cam){
     ).normalize();
     console.log(p);
 
-
-
+    lookValue = pos.subtract(cam.position);
+    ibox.rotation.y =-Math.atan2(lookValue.z, lookValue.x) - Math.PI / 2
 
     //IS object on the left or right?
     if(p.x > 0.5){
@@ -30,10 +30,10 @@ var ibox;
 function CreateInfoBox(){
     //create infobox
     //var iBox_P = new BABYLON.TransformNode("")
-    ibox = new BABYLON.MeshBuilder.CreatePlane("plane ", { height: .608, width: .383, sideOrientation: BABYLON.Mesh.DOUBLESIDE}, scene)
+    ibox = new BABYLON.MeshBuilder.CreatePlane("info plane ", { height: .608, width: .383, sideOrientation: BABYLON.Mesh.DOUBLESIDE}, scene)
     ibox.position.y = -10;
     var iMat = new BABYLON.StandardMaterial("iboxMat", scene)
-    var iMatText = new BABYLON.Texture("./assets/infobox.png", scene, true, true);
+    var iMatText = new BABYLON.Texture("assets/infobox.png", scene, true, true);
     iMat.disableLighting = true;
     iMatText.uScale = -1
     iMat.emissiveTexture = iMatText;
