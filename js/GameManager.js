@@ -43,6 +43,8 @@ function CreateInfoBox(){
     iMat.emissiveTexture = iMatText;
     iMat.opacityTexture = iMatText;
     ibox.material = iMat;
+
+    ibox.isPickable = false;
 }
 
 function createUI() {
