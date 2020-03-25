@@ -4,42 +4,9 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Recordbay MesseStand</title>
-
-    <style>
-        html,
-        body {
-            overflow: hidden;
-            width: 100%;
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-
-        #renderCanvas {
-            width: 100%;
-            height: 100%;
-            touch-action: none;
-            /*  */
-        }
-
-        #fpslabel {
-            position: absolute;
-            right: 20px;
-            top: 20px;
-            color: #999;
-            cursor: default;
-        }
-
-        #videoHolder {
-            position: absolute;
-            width: 50%;
-            top: 25%;
-            margin-left: auto;
-            margin-right: auto;
-            left: 0;
-            right: 0;
-        }
-    </style>
+    <!-- Style-->
+    <link href="style.css" rel="stylesheet">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 
     <script src="https://cdn.babylonjs.com/babylon.js"></script>
     <script src="https://cdn.babylonjs.com/inspector/babylon.inspector.bundle.js"></script>
@@ -54,16 +21,13 @@
 
 <body>
     <div id="fpsLabel"></div>
-    <div id="videoHolder">
-        <video width="100%" controls>
-            <source src="assets/Retro 2017 (loop).mp4" type="video/mp4">
-            Your browser does not support HTML5 video.
-        </video>
-    </div>
-
+    <div id="video-overlay" class="video-overlay">
+        <a class="video-overlay-close">&times;</a>
+      </div>
 
     <canvas id="renderCanvas" touch-action="none"></canvas> //touch-action="none" for best results from PEP
 
+    <script type="text/javascript" src="js/videoController.js"></script>
     <script type="text/javascript" src='js/AnimationController.js'></script>
     <script type="text/javascript" src='js/UI.js'></script>
     <script type="text/javascript" src='js/GameManager.js'></script>

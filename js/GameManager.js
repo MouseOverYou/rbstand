@@ -24,6 +24,10 @@ function SpawnInfobox(mesh, cam){
         console.log("left")
         ibox.position = new BABYLON.Vector3(pos.x-0.25, pos.y+0.1, pos.z)
     }
+
+    if(mesh.name == "HS Collider 6" || mesh.name == "HS Collider 7"){
+        play_video();
+    }
 }
 var ibox;
 
@@ -33,7 +37,7 @@ function CreateInfoBox(){
     ibox = new BABYLON.MeshBuilder.CreatePlane("info plane ", { height: .608, width: .383, sideOrientation: BABYLON.Mesh.DOUBLESIDE}, scene)
     ibox.position.y = -10;
     var iMat = new BABYLON.StandardMaterial("iboxMat", scene)
-    var iMatText = new BABYLON.Texture("./assets/infobox.png", scene, true, true);
+    var iMatText = new BABYLON.Texture("./assets/Infobox.png", scene, true, true);
     iMat.disableLighting = true;
     iMatText.uScale = -1
     iMat.emissiveTexture = iMatText;
