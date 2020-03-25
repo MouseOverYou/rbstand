@@ -28,3 +28,11 @@ function close_video() {
 $(document).keyup(function(e){
   if(e.keyCode === 27) { close_video(); }
 });
+
+$(document).keyup(function(e){
+  //if keypress "r"
+  if(e.keyCode === 82) { 
+    console.log("r Keyboard")
+    camAnim();
+   }
+});

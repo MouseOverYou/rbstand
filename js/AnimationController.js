@@ -1,4 +1,12 @@
 var particleSystem, emitterReveal, swooshParticles,rainSystem, loseParticles
+var camTween = gsap.timeline();
+function camAnim(){
+
+    //camTween.fromTo(camera, {beta: 180*(Math.PI/180)}, {beta: 82*(Math.PI/180), duration: 1});
+    //camTween.fromTo(camera, {alpha: 0*(Math.PI/180)}, {alpha: 90*(Math.PI/180), duration: 1});
+    camTween.fromTo(camera, {alpha: 0*(Math.PI/180), beta: 180*(Math.PI/180)}, {alpha: 90*(Math.PI/180), beta: 82*(Math.PI/180), duration: 1});
+}
+
 
 function TriggeroopAnimations(){
 

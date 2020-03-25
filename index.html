@@ -6,7 +6,10 @@
     <title>Recordbay MesseStand</title>
     <!-- Style-->
     <link href="style.css" rel="stylesheet">
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <!-- gsap animation-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.0.2/gsap.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 
     <script src="https://cdn.babylonjs.com/babylon.js"></script>
     <script src="https://cdn.babylonjs.com/inspector/babylon.inspector.bundle.js"></script>
@@ -23,7 +26,7 @@
     <div id="fpsLabel"></div>
     <div id="video-overlay" class="video-overlay">
         <a class="video-overlay-close">&times;</a>
-      </div>
+    </div>
 
     <canvas id="renderCanvas" touch-action="none"></canvas> //touch-action="none" for best results from PEP
 
