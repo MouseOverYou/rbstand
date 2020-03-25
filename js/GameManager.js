@@ -33,7 +33,7 @@ function CreateInfoBox(){
     ibox = new BABYLON.MeshBuilder.CreatePlane("info plane ", { height: .608, width: .383, sideOrientation: BABYLON.Mesh.DOUBLESIDE}, scene)
     ibox.position.y = -10;
     var iMat = new BABYLON.StandardMaterial("iboxMat", scene)
-    var iMatText = new BABYLON.Texture("assets/infobox.png", scene, true, true);
+    var iMatText = new BABYLON.Texture("./assets/infobox.png", scene, true, true);
     iMat.disableLighting = true;
     iMatText.uScale = -1
     iMat.emissiveTexture = iMatText;

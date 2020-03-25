@@ -21,12 +21,23 @@
             touch-action: none;
             /*  */
         }
-        #fpslabel{
-            position:absolute;
+
+        #fpslabel {
+            position: absolute;
             right: 20px;
             top: 20px;
             color: #999;
-            cursor:default;
+            cursor: default;
+        }
+
+        #videoHolder {
+            position: absolute;
+            width: 50%;
+            top: 25%;
+            margin-left: auto;
+            margin-right: auto;
+            left: 0;
+            right: 0;
         }
     </style>
 
@@ -42,9 +53,17 @@
 </head>
 
 <body>
-    <div id="fpsLabel"></div>   
+    <div id="fpsLabel"></div>
+    <div id="videoHolder">
+        <video width="100%" controls>
+            <source src="assets/Retro 2017 (loop).mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+        </video>
+    </div>
+
 
     <canvas id="renderCanvas" touch-action="none"></canvas> //touch-action="none" for best results from PEP
+
     <script type="text/javascript" src='js/AnimationController.js'></script>
     <script type="text/javascript" src='js/UI.js'></script>
     <script type="text/javascript" src='js/GameManager.js'></script>
