@@ -189,6 +189,7 @@ function ChangeMaterials() {
     //scene.getMaterialByName("arrowMat").alpha = 0 //start alpha*/
 }
 
+
 function ChangeRenderingOrder() {
     //for mesh "rendering order"
     for (var h = 0; h < slotMeshTask.loadedMeshes.length; h++) {
@@ -271,14 +272,23 @@ function AddGlow(){
 
 }
 
+
 function SpawnHotspots(){
     let counter = 0;
     let Hs_Clones = []
+    var colMat = new BABYLON.StandardMaterial("colMat", scene)
+    colMat.wireframe = true
+    colMat.alpha = 1
+
     //TO DO: ALL LOOPS IN ONE
     scene.meshes.forEach(elem => {
+        //make all unpickable
+        elem.isPickable = false; 
+
         if(elem.name.startsWith("Hotspot_")){
             elem.setEnabled(false)
             counter ++;
+            //create icon
             var clone = HSIconTask.loadedMeshes[0].instantiateHierarchy(HS_P, undefined, (source, clone) => {
                 //clone.position = elem.position;
                 clone.scaling = new BABYLON.Vector3(1, 1, 1);
@@ -286,6 +296,12 @@ function SpawnHotspots(){
             clone.position = elem.position;
             clone.rotation = BABYLON.Quaternion.FromEulerAngles(0, Math.random() * 2 * Math.PI, 0);
             clone.name = "HS Clone " + counter
+
+            //create Colliders
+            hsColl = new BABYLON.MeshBuilder.CreateBox("HS Collider " + counter, { height: 40, width: 40, depth: 10 }, scene)
+            hsColl.material = colMat
+            hsColl.parent = clone.getChildTransformNodes()[0];
+            hsColl.isPickable = true;
         }
     });
 

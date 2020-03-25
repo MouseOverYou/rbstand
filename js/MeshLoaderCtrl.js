@@ -76,68 +76,15 @@ function LoadAssets(scene, assetsManager) {
         scene.materials.forEach(mat => {
             mat.reflectionTexture = hdrTexture;
         });
+
         ChangeMaterials();
         AddGlow();
         SpawnHotspots()
+        CreateInfoBox();
         SceneStarted = true;
                 /*
         AddShadows()
 
-        
-        scene.getMaterialByName("carpetRest").reflectionTexture = hdrTexture
-        scene.getMaterialByName("Fortuny").reflectionTexture = hdrTexture
-        
-        scene.getMaterialByName("nimo").reflectionTexture = hdrTexture
-        scene.getMaterialByName("nimo trans").reflectionTexture = hdrTexture
-        scene.getMaterialByName("Soderhamn").reflectionTexture = hdrTexture
-
-        scene.getMaterialByName("Soderhamn_Pillows").reflectionTexture = hdrTexture
-        scene.getMaterialByName("Soderhamn_Pillows").metallic = 0.27
-        scene.getMaterialByName("Soderhamn_Pillows").roughness = 0.37
-        scene.getMaterialByName("Soderhamn_Pillows").bumpTexture.level = 1
-        
-        scene.getMaterialByName("wood_fence_painted").backFaceCulling = false
-        scene.getMaterialByName("wood_fence_painted").reflectionTexture = hdrTexture
-
-        scene.getMaterialByName("Soderhamn").reflectionTexture = hdrTexture
-        scene.getMaterialByName("Soderhamn").metallic =0
-        scene.getMaterialByName("Soderhamn").roughness =0.35
-        
-
-        scene.getMaterialByName("carpet").reflectionTexture = hdrTexture
-        scene.getMaterialByName("carpet").roughness= 1
-        scene.getMaterialByName("carpet").metallic =0
-
-        scene.getMaterialByName("strandmon").reflectionTexture = hdrTexture
-        scene.getMaterialByName("strandmon").bumpTexture.level = 1
-        scene.getMaterialByName("strandmon").metallic = 0
-        scene.getMaterialByName("strandmon").metallicTexture = new BABYLON.Texture("/assets/Strandmon_MetallicSmoothness.png", scene, false, false)
-        scene.getMaterialByName("strandmon").useRoughnessFromMetallicTextureAlpha =true
-        scene.getMaterialByName("strandmon").roughness =0.45
-
-        scene.getMaterialByName("Fortuny").reflectionTexture = hdrTexture
-        scene.getMaterialByName("Fortuny").bumpTexture.level = 0.1
-        scene.getMaterialByName("Fortuny").metallic =0.5
-
-        scene.getMaterialByName("jorid").albedoColor = new BABYLON.Color3.FromHexString("#282828") 
-        scene.getMaterialByName("jorid").reflectionTexture = hdrTexture
-        scene.getMaterialByName("jorid").metallic =1
-        scene.getMaterialByName("jorid").roughness = 0.15
-        scene.getMaterialByName("jorid").metallicTexture = new BABYLON.Texture("/assets/Jorid_MetallicSmoothness.png", scene, false, false)
-        scene.getMaterialByName("jorid").useRoughnessFromMetallicTextureAlpha =true
-
-        scene.getMaterialByName("Paint_Interior").reflectionTexture = hdrTexture
-        scene.getMaterialByName("Paint_Interior").bumpTexture.level = 0.22
-        scene.getMaterialByName("Paint_Interior").metallic = 0.04
-        scene.getMaterialByName("Paint_Interior").roughness = 0.18
-        
-        scene.getMaterialByName("Wood_Floor").metallic = 1
-        scene.getMaterialByName("Wood_Floor").roughness = 0.1
-        scene.getMaterialByName("Wood_Floor").reflectionTexture = hdrTexture
-        scene.getMaterialByName("Wood_Floor").bumpTexture.level = 0.1
-        scene.getMaterialByName("Wood_Floor").metallicTexture = new BABYLON.Texture("/assets/wood_metallic.jpg", scene, false, false)
-
-        
         sphere = BABYLON.MeshBuilder.CreateSphere("sphere", { diameter: 0.15 }, scene);
         sphere.position = new BABYLON.Vector3(0.005,2.29,0)
         sphere.scaling = new BABYLON.Vector3(0.3, 0.3, 0.3)

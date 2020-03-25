@@ -4,6 +4,7 @@ var engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine
 var myGUI
 var fillLight, mainLight, shadowGenerator
 
+
 /******* Add the create scene function ******/
 var createScene = function () {
 
@@ -207,13 +208,20 @@ var createScene = function () {
         }
     }
 
-
+    scene.onPointerDown = function (evt) {
+        
+        var pickInfo = scene.pick(scene.pointerX, scene.pointerY, function (mesh) { return mesh.name !== "ground1" && mesh.isPickable; });
+            if (pickInfo && pickInfo.pickedMesh) {
+                SpawnInfobox(pickInfo.pickedMesh, camera)
+                console.log(pickInfo.pickedMesh.name);
+            }
+        }
     return scene;
 };
 /******* End of the create scene function ******/
 
 var scene = createScene(); //Call the createScene function
-//scene.debugLayer.show();
+scene.debugLayer.show();
 
 // Register a render loop to repeatedly render the scene
 engine.runRenderLoop(function () {

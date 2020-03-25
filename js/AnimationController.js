@@ -262,27 +262,3 @@ function createLoseAnim() {
     // Start the particle system
 
 }
-
-/*
-scene.getMaterialByName("slotLight").animations = []
-scene.getMaterialByName("slotLight").animations.push(lightAnim)
-scene.getMaterialByName("spinMitte").animations = []
-scene.getMaterialByName("spinMitte").animations.push(lightAnim)
-scene.getMaterialByName("spinSeite").animations = []
-scene.getMaterialByName("spinSeite").animations.push(lightAnim)*/
-/*
-addRevealAnim("bodyEdges")
-addRevealAnim("bodyFront")
-addRevealAnim("bodySide")
-addRevealAnim("buttonGray")
-addRevealAnim("buttonRed")
-addRevealAnim("hebelTop")
-addRevealAnim("hebelUnten")
-addRevealAnim("Kasten")
-addRevealAnim("Metal")
-addRevealAnim("name2")
-addRevealAnim("slotLight")
-addRevealAnim("spinBody")
-addRevealAnim("spinEdges")
-addRevealAnim("spinMitte")
-addRevealAnim("spinSeite")*/
