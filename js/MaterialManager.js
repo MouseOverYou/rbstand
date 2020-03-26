@@ -1,4 +1,4 @@
-function ChangeMaterials() {
+function ChangeMaterialProperties() {
 
     var redBay =new BABYLON.Color3.FromHexString("#d8575");
     var blueBay =new BABYLON.Color3.FromHexString("#0c83e2");
@@ -46,6 +46,7 @@ function ChangeMaterials() {
 
     //handle All at once
     scene.materials.forEach(mat => {
+        //add reflections
         mat.reflectionTexture = hdrTexture;
     });
     
@@ -77,9 +78,10 @@ function ChangeMaterials() {
 
 }
 
-var iMat, iMatTextVideo, iMatText
+var iMat, iMatTextVideo, iMatText, mainScreenMat
 var colMat
 function CreateCustomMaterials(){
+    //Infoboxes materials
     iMat = new BABYLON.StandardMaterial("iBoxMat", scene);
     iMat.disableLighting = true;
 
@@ -94,4 +96,20 @@ function CreateCustomMaterials(){
     colMat.wireframe = false
     colMat.alpha = 0
 
+    //screenvideo materials
+    mainScreenMat = new BABYLON.PBRMaterial("mainScreenMat", scene);
+    mainScreenVid = new BABYLON.VideoTexture("mainScreenVid", "./assets/Messestand_Format_1.mp4", scene, true, false);
+    mainScreenVid.vScale = -1;
+    mainScreenMat.emissiveTexture = mainScreenVid
+    mainScreenMat.albedoTexture = mainScreenVid
+    mainScreenMat.reflectionTexture = hdrTexture;
+    mainScreenMat.emissiveColor = new BABYLON.Color3.FromHexString("#ffffff")
+    mainScreenMat.metallic = 0
+    mainScreenMat.roughness = 0
+
+    
+}
+function ChangeMeshesMaterials(){
+    scene.getMeshByName("Screen_Main_1").material = mainScreenMat;
+    scene.getMeshByName("Screen_Main_2").material = mainScreenMat;
 }

@@ -4,8 +4,9 @@ var SceneStarted = false;
 function SetScene() {
     console.log("finish loading")
 
-    ChangeMaterials();
+    ChangeMaterialProperties();
     CreateCustomMaterials();
+    ChangeMeshesMaterials();
     AddGlow();
     SpawnHotspots();
     CreateInfoBox();
