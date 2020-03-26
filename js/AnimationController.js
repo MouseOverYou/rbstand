@@ -1,16 +1,37 @@
-var particleSystem, emitterReveal, swooshParticles,rainSystem, loseParticles
+var particleSystem, emitterReveal, swooshParticles, rainSystem, loseParticles
 var camTween = gsap.timeline();
-function camAnim(){
+let origin = new BABYLON.Vector3(0, 0.1, 0);
+
+function camAnim() {
 
     //camTween.fromTo(camera, {beta: 180*(Math.PI/180)}, {beta: 82*(Math.PI/180), duration: 1});
     //camTween.set(camera, {alpha: 90*(Math.PI/180), beta: 82*(Math.PI/180)});
-    camTween.fromTo(camera, {alpha: 0*(Math.PI/180), beta: 180*(Math.PI/180)}, {alpha: 90*(Math.PI/180), beta: 82*(Math.PI/180), duration: 1});
+    camTween.fromTo(camera, { alpha: 0 * (Math.PI / 180), beta: 180 * (Math.PI / 180) }, { alpha: 90 * (Math.PI / 180), beta: 82 * (Math.PI / 180), duration: 1 });
 }
 
+function lookHS(mesh) {
 
-function TriggeroopAnimations(){
+    let v0 = new BABYLON.Vector3(0, 0.1, 0);
+    let v1 = mesh.getAbsolutePosition().subtract(v0);
 
-    if(SceneStarted){
+    v1.normalize();
+    let angle = Math.atan2(v1.z, v1.x) 
+    let angleInDegree = BABYLON.Tools.ToDegrees(angle) +180
+    //let newAlpha = angleInDegree - 90 ;
+    console.log("angle is " + angleInDegree)
+    
+    camera.setTarget(origin)
+    camTween.to(camera, { alpha: angle + Math.PI, beta: 90 * (Math.PI / 180),  radius: 0.3, duration: 1} )
+}
+
+function zoomCamOut(){
+    camera.setTarget(origin)
+    camTween.to(camera, { alpha: 90 * (Math.PI / 180), beta: 82 * (Math.PI / 180),  radius: 2.8, duration: 1} )
+}
+
+function TriggeroopAnimations() {
+
+    if (SceneStarted) {
         HS_P.getChildren().forEach(elem => {
             elem.rotation.y += 0.005;
         });
@@ -226,7 +247,7 @@ function createLoseAnim() {
     //rainP.rotation.x = Math.PI / 2
     loseP.position.y = 6
     loseP.parent = SceneMeshes
-    
+
     loseParticles = new BABYLON.ParticleSystem("lose", 1000, scene);
     loseParticles.particleTexture = new BABYLON.Texture("/assets/sad face.png", scene);
 
@@ -259,8 +280,8 @@ function createLoseAnim() {
     loseParticles.direction2 = new BABYLON.Vector3(0, -30, 0);
 
     // Angular speed, in radians
-    loseParticles.minAngularSpeed = -Math.PI*4;
-    loseParticles.maxAngularSpeed = Math.PI*4;
+    loseParticles.minAngularSpeed = -Math.PI * 4;
+    loseParticles.maxAngularSpeed = Math.PI * 4;
 
     // Speed
     loseParticles.minEmitPower = 1;

@@ -7,6 +7,27 @@ body {
     padding: 0;
 }
 
+.back-zoom {
+  position: absolute;
+  z-index: 1000;
+  bottom: 15px;
+  left: 20px;
+  font-size: 74px;
+  line-height: 1;
+  font-weight: 400;
+  color: #fff;
+  opacity:0;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-transition: all 200ms;
+  transition: all 200ms;
+}
+
+.back-zoom.open {
+  opacity: 1;
+}
+
+
 /*BABYLON CSS*/
 #renderCanvas {
     width: 100%;
@@ -58,8 +79,9 @@ body {
     -webkit-transition: all 200ms;
     transition: all 200ms;
   }
+
   
-  .video-overlay-close:hover {
+  .video-overlay-close:hover, .back-zoom:hover{
     color: #fa183d;
   }
   

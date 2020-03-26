@@ -36,3 +36,19 @@ $(document).keyup(function(e){
     camAnim();
    }
 });
+
+
+//UI controllers
+function show_backbutton(){
+  $('.back-zoom').addClass('open');
+}
+
+$('.back-zoom').on('click', function(e){
+  e.preventDefault();
+  hide_backbutton();
+  zoomCamOut();
+});
+
+function hide_backbutton() {
+$('.back-zoom').removeClass('open');
+};

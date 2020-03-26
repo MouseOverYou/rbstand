@@ -29,6 +29,8 @@ function SpawnInfobox(mesh, cam) {
         }
 
         LookAt_Y(pos, cam);
+        lookHS(mesh);
+        show_backbutton();
         //IS object on the left or right?
         if (p.x > 0.5) {
             //console.log("right");

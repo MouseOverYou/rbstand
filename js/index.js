@@ -13,9 +13,9 @@ var createScene = function () {
     var scene = new BABYLON.Scene(engine);
 
     // Add a camera to the scene and attach it to the canvas
-    camera = new BABYLON.ArcRotateCamera("Camera", 90 * (Math.PI / 180), 82 * (Math.PI / 180), 2.8, new BABYLON.Vector3(0, 0, 0), scene);
+    camera = new BABYLON.ArcRotateCamera("Camera", 90 * (Math.PI / 180), 82 * (Math.PI / 180), 2.8, new BABYLON.Vector3(0, 0.1, 0), scene);
     camera.minZ = 0.1
-    camera.lowerRadiusLimit = 1
+    camera.lowerRadiusLimit = 0.3
     camera.upperRadiusLimit = 2.8
     camera.angularSensibilityX = 3000
     camera.angularSensibilityy = 3000
