@@ -1,6 +1,6 @@
 var particleSystem, emitterReveal, swooshParticles, rainSystem, loseParticles
 var camTween = gsap.timeline();
-let origin = new BABYLON.Vector3(0, 0.1, 0);
+let origin = new BABYLON.Vector3(0, 0.3, 0);
 
 function camAnim() {
 
