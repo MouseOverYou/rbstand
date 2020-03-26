@@ -13,7 +13,7 @@ var createScene = function () {
     var scene = new BABYLON.Scene(engine);
 
     // Add a camera to the scene and attach it to the canvas
-    camera = new BABYLON.ArcRotateCamera("Camera", 90*(Math.PI/180), 82*(Math.PI/180), 2.8, new BABYLON.Vector3(0, 0, 0), scene);
+    camera = new BABYLON.ArcRotateCamera("Camera", 90 * (Math.PI / 180), 82 * (Math.PI / 180), 2.8, new BABYLON.Vector3(0, 0, 0), scene);
     camera.minZ = 0.1
     camera.lowerRadiusLimit = 1
     camera.upperRadiusLimit = 2.8
@@ -24,21 +24,21 @@ var createScene = function () {
     var assetsManager = new BABYLON.AssetsManager(scene)
     LoadAssets(scene, assetsManager)
 
-    mainLight = new BABYLON.DirectionalLight("mainLight", new BABYLON.Vector3(1,-90, -180), scene);
-    mainLight.position = new BABYLON.Vector3(0,2,0);
+    mainLight = new BABYLON.DirectionalLight("mainLight", new BABYLON.Vector3(1, -90, -180), scene);
+    mainLight.position = new BABYLON.Vector3(0, 2, 0);
     mainLight.intensity = 1.5
 
-    var pointLight = new BABYLON.PointLight("pointLight", new BABYLON.Vector3(0.005,2.29,0), scene);
-    pointLight.intensity =0.00
+    var pointLight = new BABYLON.PointLight("pointLight", new BABYLON.Vector3(0.005, 2.29, 0), scene);
+    pointLight.intensity = 0.00
 
-    	// Sky material
-	var skyboxMaterial = new BABYLON.SkyMaterial("skyMaterial", scene);
+    // Sky material
+    var skyboxMaterial = new BABYLON.SkyMaterial("skyMaterial", scene);
     skyboxMaterial.backFaceCulling = false;
     skyboxMaterial.cameraOffset.y = 50;
     skyboxMaterial.luminance = 0.05;
-	//skyboxMaterial._cachedDefines.FOG = true;
+    //skyboxMaterial._cachedDefines.FOG = true;
 
-	// Sky mesh (box)
+    // Sky mesh (box)
     var skybox = BABYLON.Mesh.CreateBox("skyBox", 1000.0, scene);
     skybox.material = skyboxMaterial;
 
@@ -61,8 +61,8 @@ var createScene = function () {
             defaultPipeline.imageProcessing.contrast = 1.8; // 1 by default
             defaultPipeline.imageProcessing.exposure = 1; // 1 by default
             /* vignette */
-            defaultPipeline.imageProcessing.vignetteEnabled =true
-            defaultPipeline.imageProcessing.vignetteWeight =3.1
+            defaultPipeline.imageProcessing.vignetteEnabled = true
+            defaultPipeline.imageProcessing.vignetteWeight = 3.1
             defaultPipeline.imageProcessing.vignetteFOV = 0.5
             /* color grading */
             defaultPipeline.imageProcessing.colorGradingEnabled = false; // false by default
@@ -160,13 +160,17 @@ var createScene = function () {
     }
 
     scene.onPointerDown = function (evt) {
-        
+
         var pickInfo = scene.pick(scene.pointerX, scene.pointerY, function (mesh) { return mesh.name !== "ground1" && mesh.isPickable; });
-            if (pickInfo && pickInfo.pickedMesh) {
-                SpawnInfobox(pickInfo.pickedMesh, camera)
-                console.log(pickInfo.pickedMesh.name);
-            }
+        if (pickInfo && pickInfo.pickedMesh) {
+            SpawnInfobox(pickInfo.pickedMesh, camera)
+            console.log(pickInfo.pickedMesh.name);
         }
+    }
+
+    scene.onPointerUp = function () {
+        mainScreenVid.video.play();
+    }
     return scene;
 };
 /******* End of the create scene function ******/
