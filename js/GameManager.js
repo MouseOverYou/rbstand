@@ -16,8 +16,8 @@ function SetScene() {
 function SpawnInfobox(mesh, cam) {
     //console.log("hast collider tag?")
     //console.log(BABYLON.Tags.MatchesQuery(mesh, "hs_coll"))
-    var { pos, p } = WorldPosToScreenPos(mesh, cam);
     //console.log(p);
+    var pos = mesh.getAbsolutePosition();
 
     if (BABYLON.Tags.MatchesQuery(mesh, "hs_coll")) {
         if (mesh.name == "HS Collider 6" || mesh.name == "HS Collider 7") {
@@ -31,7 +31,12 @@ function SpawnInfobox(mesh, cam) {
         LookAt_Y(pos, cam);
         lookHS(mesh);
         show_backbutton();
+ 
+        IBox_P.position = new BABYLON.Vector3(pos.x , pos.y + 0.2, pos.z)
         //IS object on the left or right?
+        /*
+
+        var p  = WorldPosToScreenPos(pos, cam);
         if (p.x > 0.5) {
             //console.log("right");
             IBox_P.position = new BABYLON.Vector3(pos.x + 0.25, pos.y + 0.1, pos.z)
@@ -40,6 +45,7 @@ function SpawnInfobox(mesh, cam) {
             //console.log("left")
             IBox_P.position = new BABYLON.Vector3(pos.x - 0.25, pos.y + 0.1, pos.z)
         }
+        */
     }
 
     if(BABYLON.Tags.MatchesQuery(mesh, "vid_coll")){
@@ -54,11 +60,11 @@ function LookAt_Y(pos, cam) {
     IBox_P.rotation.y = -Math.atan2(lookValue.z, lookValue.x) - Math.PI / 2;
 }
 
-function WorldPosToScreenPos(mesh, cam) {
-    var pos = mesh.getAbsolutePosition();
+function WorldPosToScreenPos(pos, cam) {
+
     //calculate world to screen position of selected mesh
     var p = BABYLON.Vector3.Project(pos, BABYLON.Matrix.Identity(), scene.getTransformMatrix(), cam.viewport.toGlobal(engine.getRenderWidth(true), engine.getRenderHeight(true))).normalize();
-    return { pos, p };
+    return p;
 }
 
 var IBox, IBox_P, videoCollider;

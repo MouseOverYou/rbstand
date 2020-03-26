@@ -1,6 +1,6 @@
 var particleSystem, emitterReveal, swooshParticles, rainSystem, loseParticles
 var camTween = gsap.timeline();
-let origin = new BABYLON.Vector3(0, 0.3, 0);
+let origin = new BABYLON.Vector3(0, 0.26, 0);
 
 function camAnim() {
 
@@ -21,7 +21,7 @@ function lookHS(mesh) {
     console.log("angle is " + angleInDegree)
     
     camera.setTarget(origin)
-    camTween.to(camera, { alpha: angle + Math.PI, beta: 90 * (Math.PI / 180),  radius: 0.3, duration: 1} )
+    camTween.to(camera, { alpha: angle + Math.PI, beta: 100 * (Math.PI / 180),  radius: 0.3, duration: 1} )
 }
 
 function zoomCamOut(){
