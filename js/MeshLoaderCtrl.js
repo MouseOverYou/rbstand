@@ -72,16 +72,8 @@ function LoadAssets(scene, assetsManager) {
 
     var pbr
     assetsManager.onFinish = function (task) {
-        console.log("finish loading")
-        scene.materials.forEach(mat => {
-            mat.reflectionTexture = hdrTexture;
-        });
+        SetScene();
 
-        ChangeMaterials();
-        AddGlow();
-        SpawnHotspots()
-        CreateInfoBox();
-        SceneStarted = true;
                 /*
         AddShadows()
 

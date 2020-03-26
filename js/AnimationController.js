@@ -3,7 +3,7 @@ var camTween = gsap.timeline();
 function camAnim(){
 
     //camTween.fromTo(camera, {beta: 180*(Math.PI/180)}, {beta: 82*(Math.PI/180), duration: 1});
-    //camTween.fromTo(camera, {alpha: 0*(Math.PI/180)}, {alpha: 90*(Math.PI/180), duration: 1});
+    //camTween.set(camera, {alpha: 90*(Math.PI/180), beta: 82*(Math.PI/180)});
     camTween.fromTo(camera, {alpha: 0*(Math.PI/180), beta: 180*(Math.PI/180)}, {alpha: 90*(Math.PI/180), beta: 82*(Math.PI/180), duration: 1});
 }
 
