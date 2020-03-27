@@ -101,8 +101,8 @@ function CreateCustomMaterials(){
     //screenvideo materials
     mainScreenMat = new BABYLON.PBRMaterial("mainScreenMat", scene);
     mainScreenVid = new BABYLON.VideoTexture("mainScreenVid", "./assets/Messestand_Format_1.mp4", scene, true, false);
-    mainScreenVid.vScale = 1;
-    mainScreenVid.uScale = -1;
+    mainScreenVid.vScale = -1;
+    mainScreenVid.uScale = 1;
     mainScreenVid.video.pause();
     mainScreenMat.emissiveTexture = mainScreenVid
     mainScreenMat.albedoTexture = mainScreenVid
