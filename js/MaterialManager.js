@@ -6,6 +6,7 @@ function ChangeMaterialProperties() {
     var darkGrayBay = new BABYLON.Color3.FromHexString("#323334");
     var blackBay = new BABYLON.Color3.FromHexString("#000000");
 
+    /*
     var screenTex = new BABYLON.Texture("./assets/ascree.jpg", scene, true, false)
     var perlinText = new BABYLON.NoiseProceduralTexture("perlin", 254, scene);
 
@@ -43,6 +44,7 @@ function ChangeMaterialProperties() {
 
     scene.getMaterialByName("leatherWhiteMat").metallic = 0.2
     scene.getMaterialByName("leatherWhiteMat").roughness = 0.15
+    */
 
     //handle All at once
     scene.materials.forEach(mat => {
@@ -99,7 +101,8 @@ function CreateCustomMaterials(){
     //screenvideo materials
     mainScreenMat = new BABYLON.PBRMaterial("mainScreenMat", scene);
     mainScreenVid = new BABYLON.VideoTexture("mainScreenVid", "./assets/Messestand_Format_1.mp4", scene, true, false);
-    mainScreenVid.vScale = -1;
+    mainScreenVid.vScale = 1;
+    mainScreenVid.uScale = -1;
     mainScreenVid.video.pause();
     mainScreenMat.emissiveTexture = mainScreenVid
     mainScreenMat.albedoTexture = mainScreenVid

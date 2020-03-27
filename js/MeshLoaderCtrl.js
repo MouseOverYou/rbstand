@@ -29,7 +29,7 @@ function LoadAssets(scene, assetsManager) {
     }
 
     Messe_P = new BABYLON.TransformNode("Messe_P");
-    MesseLoaderTask = assetsManager.addMeshTask("", "", "./assets/3dstand_v4.glb")
+    MesseLoaderTask = assetsManager.addMeshTask("", "", "./assets/3dstand_v5.glb")
 
     MesseLoaderTask.onSuccess = function (task) {
         
