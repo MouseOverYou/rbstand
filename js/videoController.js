@@ -39,6 +39,7 @@ $(document).keyup(function(e){
 
 
 //UI controllers
+//Back button
 function show_backbutton(){
   $('.back-zoom').addClass('open');
 }
@@ -52,3 +53,40 @@ $('.back-zoom').on('click', function(e){
 function hide_backbutton() {
 $('.back-zoom').removeClass('open');
 };
+
+
+//Infobox button
+//callinfobox button
+let showInfo = false;
+$(document).keyup(function(e){
+  //if keypress "i"
+  if(e.keyCode === 73) { 
+    console.log("i Keyboard")
+    showInfo =! showInfo;
+    if(showInfo){
+      show_Info_Overlay();
+    }
+    else{
+      hide_Info_Overlay();
+    }
+
+   }
+});
+
+function show_Info_Overlay(){
+  $('.info-overlay').addClass('open')
+  $('.info-overlay').removeClass('close')
+  $('.infobox').addClass('open')
+  $('.infobox').removeClass('close')
+  $('.videobox').addClass('open')
+  $('.videobox').removeClass('close')
+}
+
+function hide_Info_Overlay(){
+ $('.info-overlay').addClass('close')
+ $('.info-overlay').removeClass('open')
+ $('.infobox').addClass('close')
+ $('.infobox').removeClass('open')
+ $('.videobox').addClass('close')
+ $('.videobox').removeClass('open')
+}
