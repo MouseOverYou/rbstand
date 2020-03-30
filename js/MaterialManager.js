@@ -33,8 +33,8 @@ function ChangeMaterialProperties() {
 
     scene.getMaterialByName("screenVert").metallic = 0.75
     scene.getMaterialByName("screenVert").roughness = 0
-    scene.getMaterialByName("screenMat").metallic = 0.75
-    scene.getMaterialByName("screenMat").roughness = 0
+    scene.getMaterialByName("screenHor").metallic = 0.75
+    scene.getMaterialByName("screenHor").roughness = 0
     scene.getMaterialByName("screenMain").metallic = 0.75
     scene.getMaterialByName("screenMain").roughness = 0
 
@@ -75,8 +75,8 @@ function CreateCustomMaterials(){
     iMat.opacityTexture = iMatTextVideo;
 
     colMat = new BABYLON.StandardMaterial("colMat", scene)
-    colMat.wireframe = false
-    colMat.alpha = 0
+    colMat.wireframe = true
+    colMat.alpha = 1
 
     //screenvideo materials
     mainScreenMat = new BABYLON.PBRMaterial("mainScreenMat", scene);

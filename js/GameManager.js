@@ -32,7 +32,7 @@ function SpawnInfobox(mesh, cam) {
         lookHS(mesh);
         show_backbutton();
  
-        IBox_P.position = new BABYLON.Vector3(pos.x , pos.y + 0.2, pos.z)
+        //IBox_P.position = new BABYLON.Vector3(pos.x , pos.y + 0.2, pos.z)
         //IS object on the left or right?
         /*
 

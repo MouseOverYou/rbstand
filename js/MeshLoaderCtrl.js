@@ -1,7 +1,7 @@
 var slot_P, Messe_P
 var hdrTexture
 var SceneMeshes
-var slotMeshTask, startMeshTask, sphere, MesseLoaderTask, HSIconTask, HS_P
+var slotMeshTask, startMeshTask, sphere, MesseLoaderTask, HSIconTask, HS_P, LogosLoaderTask
 
 function LoadAssets(scene, assetsManager) {
 
@@ -46,6 +46,16 @@ function LoadAssets(scene, assetsManager) {
     MesseLoaderTask.onError = function (task, message, exception) {
         console.log(message, exception);
     }
+
+    LogosLoaderTask = assetsManager.addMeshTask("", "", "./assets/stand_logos.glb")
+    LogosLoaderTask.onSuccess = function (task) {
+        task.loadedMeshes[0].scaling = new BABYLON.Vector3(0.003, 0.003, 0.003)
+    }
+
+    LogosLoaderTask.onError = function (task, message, exception) {
+        console.log(message, exception);
+    }
+
 
     HS_P = new BABYLON.TransformNode("HS_P");
     HSIconTask = assetsManager.addMeshTask("", "", "./assets/HS_Icon.glb")

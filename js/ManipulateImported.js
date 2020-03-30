@@ -90,25 +90,69 @@ function SpawnHotspots(){
         //make all unpickable
         elem.isPickable = false; 
 
-        if(elem.name.startsWith("Hotspot_")){
-            elem.setEnabled(false)
+        if(elem.name.startsWith("ref_Hotspot_")){
+            //elem.setEnabled(false)
+            elem.visibility = 0;
             counter ++;
             //create icon
-            var clone = HSIconTask.loadedMeshes[0].instantiateHierarchy(HS_P, undefined, (source, clone) => {
+            var clone = HSIconTask.loadedMeshes[0].instantiateHierarchy(elem, undefined, (source, clone) => {
                 //clone.position = elem.position;
                 clone.scaling = new BABYLON.Vector3(1, 1, 1);
             })
-            clone.position = elem.position;
+            //clone.position = elem.position;
             clone.rotation = BABYLON.Quaternion.FromEulerAngles(0, Math.random() * 2 * Math.PI, 0);
             clone.name = "HS Clone " + counter
 
+        }
+        else if(elem.name.startsWith("Arrow_")){
             //create Colliders
-            hsColl = new BABYLON.MeshBuilder.CreateBox("HS Collider " + counter, { height: 40, width: 40, depth: 10 }, scene)
-            hsColl.material = colMat
-            hsColl.parent = clone.getChildTransformNodes()[0];
-            hsColl.isPickable = true;
-            BABYLON.Tags.AddTagsTo(hsColl, "hs_coll");
+            FeedWithLogo(elem.name.split("_")[1], elem)
+            arrowColl = new BABYLON.MeshBuilder.CreateBox("Arrow Collider " + counter, { height: 40, width: 40, depth: 10 }, scene)
+            arrowColl.material = colMat
+            arrowColl.parent = elem;
+            arrowColl.isPickable = true;
+            BABYLON.Tags.AddTagsTo(arrowColl, "hs_coll");
         }
     });
 
+}
+
+function FeedWithLogo(name, parent){
+    console.log(LogosLoaderTask.loadedMeshes[0])
+    switch(name){
+        case "1":
+            console.log("contact station");
+            PositionLogo()
+            break;
+        case "2":
+            console.log("linde station");
+            PositionLogo()
+            break;
+        case "3":
+            console.log("ar station")
+            PositionLogo()
+            break;
+        case "4":
+            console.log("varycon station");
+            PositionLogo()
+            break;
+        case "5":
+            console.log("vr station");
+            PositionLogo()
+            break;
+        case "6":
+            console.log("telekom staion");
+            PositionLogo()
+            break;
+        case "7":
+            console.log("bombardier station");
+            PositionLogo()
+            break;
+    }
+
+    function PositionLogo(num) {
+        var logoMesh = LogosLoaderTask.loadedMeshes[0].getChildMeshes()[0]
+        logoMesh.parent = parent.parent.parent
+        logoMesh.position = new BABYLON.Vector3(parent.parent.position.x, parent.parent.position.y + 55, parent.parent.position.z)
+    }
 }
