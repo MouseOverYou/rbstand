@@ -21,7 +21,7 @@ function lookHS(mesh) {
     console.log("angle is " + angleInDegree)
     
     camera.setTarget(origin)
-    camTween.to(camera, { alpha: angle + Math.PI, beta: 100 * (Math.PI / 180),  radius: 0.3, duration: 1} )
+    camTween.to(camera, { alpha: angle + Math.PI, beta: 100 * (Math.PI / 180),  radius: 0.1, duration: 1} )
 }
 
 function zoomCamOut(){

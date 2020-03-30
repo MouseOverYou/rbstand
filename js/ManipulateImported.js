@@ -71,7 +71,7 @@ function AddShadows() {
 function AddGlow(){
         // Add lights to the scene
         var gl = new BABYLON.GlowLayer("glow", scene) //glow layer 
-        gl.intensity = 0.85;
+        gl.intensity = 0.7;
         scene.meshes.forEach(elem => {
             if(elem.name.startsWith("Screen_")){
                 gl.addExcludedMesh(elem)

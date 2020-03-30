@@ -2,7 +2,7 @@
 var canvas = document.getElementById("renderCanvas"); // Get the canvas element 
 var engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine
 var myGUI
-var fillLight, mainLight, shadowGenerator
+var fillLight, lightLinks, lightRechts, shadowGenerator
 var camera;
 
 
@@ -15,8 +15,8 @@ var createScene = function () {
     // Add a camera to the scene and attach it to the canvas
     camera = new BABYLON.ArcRotateCamera("Camera", 90 * (Math.PI / 180), 82 * (Math.PI / 180), 2.8, new BABYLON.Vector3(0, 0.1, 0), scene);
     camera.minZ = 0.1
-    camera.lowerRadiusLimit = 0.3
-    camera.upperRadiusLimit = 2.8
+    camera.lowerRadiusLimit = 0.1
+    camera.upperRadiusLimit = 4
     camera.angularSensibilityX = 3000
     camera.angularSensibilityy = 3000
     camera.wheelPrecision = 100
@@ -24,12 +24,13 @@ var createScene = function () {
     var assetsManager = new BABYLON.AssetsManager(scene)
     LoadAssets(scene, assetsManager)
 
-    mainLight = new BABYLON.DirectionalLight("mainLight", new BABYLON.Vector3(1, -90, -180), scene);
-    mainLight.position = new BABYLON.Vector3(0, 2, 0);
-    mainLight.intensity = 1.5
+    lightLinks = new BABYLON.DirectionalLight("lightLinks", new BABYLON.Vector3(-60, -41,-90), scene);
+    lightLinks.position = new BABYLON.Vector3(1, 1, 0);
+    lightLinks.intensity = 2
 
-    var pointLight = new BABYLON.PointLight("pointLight", new BABYLON.Vector3(0.005, 2.29, 0), scene);
-    pointLight.intensity = 0.00
+    lightRechts = new BABYLON.DirectionalLight("lightLinks", new BABYLON.Vector3(120, -41, -90), scene);
+    lightRechts.position = new BABYLON.Vector3(-1, 1, 0);
+    lightRechts.intensity = 2
 
     // Sky material
     var skyboxMaterial = new BABYLON.SkyMaterial("skyMaterial", scene);
