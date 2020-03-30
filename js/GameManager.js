@@ -16,31 +16,31 @@ var lastSelected = ""
 function openInfoUI(selec){
     //handle infobox
     switch(selec){
-        case "0":
-            document.getElementById("project-ssi-schaefer").style.display = "block";
-            lastSelected = document.getElementById("project-ssi-schaefer")
-            break;
         case "1":
-            document.getElementById("project-linde").style.display = "block";
+            document.getElementById("project-ssi-schaefer").style.display = "block";
             lastSelected = document.getElementById("project-ssi-schaefer")
             break;
         case "2":
             document.getElementById("project-ssi-schaefer").style.display = "block";
-            lastSelected = document.getElementById("project-ssi-schaefer");
+            lastSelected = document.getElementById("project-ssi-schaefer")
             break;
         case "3":
+            document.getElementById("project-ssi-schaefer").style.display = "block";
+            lastSelected = document.getElementById("project-ssi-schaefer");
+            break;
+        case "4":
             document.getElementById("project-varycon").style.display = "block";
             lastSelected = document.getElementById("project-varycon")
             break;
-        case "4":
+        case "5":
             document.getElementById("project-bayer-ag").style.display = "block";
             lastSelected = document.getElementById("project-bayer-ag")
             break;
-        case "5":
+        case "6":
             document.getElementById("project-deutsche-telekom").style.display = "block";
             lastSelected = document.getElementById("project-deutsche-telekom")
             break;
-        case "6":
+        case "7":
             document.getElementById("project-bombardier").style.display = "block";
             lastSelected = document.getElementById("project-bombardier")
             break;
@@ -57,9 +57,12 @@ var click = 0
 $('.project-overlay').on('click', function(e){
     e.preventDefault();
     click++;
+    console.log("hello overlay")
+    console.log(click)
+    lastSelected.style.display = "none"
+
     if(click>1){
-        console.log("hello overlay")
-        lastSelected.style.display = "none"
+
         click =0;
     }
 

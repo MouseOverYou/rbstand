@@ -166,7 +166,7 @@ var createScene = function () {
         if (pickInfo && pickInfo.pickedMesh) {
             SpawnInfobox(pickInfo.pickedMesh, camera)
             console.log(pickInfo.pickedMesh.name);
-            var selection = pickInfo.pickedMesh.name.split('Arrow Collider ')[1];
+            var selection = pickInfo.pickedMesh.name.split('hs Collider ')[1];
             console.log(selection)
             openInfoUI(selection)
         }

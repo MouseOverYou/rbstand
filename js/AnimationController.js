@@ -32,7 +32,7 @@ function zoomCamOut(){
 function TriggeroopAnimations() {
 
     if (SceneStarted) {
-        HS_P.getChildren().forEach(elem => {
+        hsHolder.forEach(elem => {
             elem.rotation.y += 0.005;
         });
     }

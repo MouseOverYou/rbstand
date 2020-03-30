@@ -80,7 +80,7 @@ function AddGlow(){
 
 }
 
-
+let hsHolder = []
 function SpawnHotspots(){
     let counter = 0;
     let Hs_Clones = []
@@ -103,15 +103,28 @@ function SpawnHotspots(){
             clone.rotation = BABYLON.Quaternion.FromEulerAngles(0, Math.random() * 2 * Math.PI, 0);
             clone.name = "HS Clone " + counter
 
+            hsColl = new BABYLON.MeshBuilder.CreateBox("hs Collider " + counter, { height: 40, width: 40, depth: 10 }, scene)
+            hsColl.material = colMat
+            hsColl.parent = elem;
+            hsColl.isPickable = true;
+            BABYLON.Tags.AddTagsTo(hsColl, "hs_coll");
+            hsHolder.push(clone);
         }
         else if(elem.name.startsWith("Arrow_")){
             //create Colliders
+            elem.visibility = false;
             FeedWithLogo(elem.name.split("_")[1], elem)
+            /*
+
             arrowColl = new BABYLON.MeshBuilder.CreateBox("Arrow Collider " + counter, { height: 40, width: 40, depth: 10 }, scene)
             arrowColl.material = colMat
             arrowColl.parent = elem;
             arrowColl.isPickable = true;
             BABYLON.Tags.AddTagsTo(arrowColl, "hs_coll");
+            */
+        }
+        else if(elem.name.startsWith("ref_Anchor_")){
+            elem.visibility = false;
         }
     });
 

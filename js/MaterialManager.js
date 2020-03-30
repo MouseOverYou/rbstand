@@ -27,7 +27,7 @@ function ChangeMaterialProperties() {
     scene.getMaterialByName("leder_weiss").bumpTexture.level = 0.1
     
 
-    scene.getMaterialByName("Metal").albedoColor = lightGrayBay
+    scene.getMaterialByName("Metal").albedoColor = darkGrayBay
     scene.getMaterialByName("Metal").metallic = 1
     scene.getMaterialByName("Metal").roughness = 0.5
 
@@ -41,10 +41,12 @@ function ChangeMaterialProperties() {
     scene.getMaterialByName("varyconMat").metallic = 0.4
     scene.getMaterialByName("varyconMat").roughness = 0
 
-
     //icons
-    //scene.getMaterialByName("iconMatGlass").alpha = 0.9
-    //scene.getMaterialByName("leuchteMat").albedoColor = lightGrayBay;
+    scene.getMaterialByName("iconMatGlass").alpha = 0.75
+    scene.getMaterialByName("iconMatWhite").metallic = 0.3
+    scene.getMaterialByName("iconMatWhite").roughness = 0.1
+    scene.getMaterialByName("iconMatRed").metallic = 1
+    scene.getMaterialByName("iconMatRed").roughness = 1
 
     /*
     var screenTex = new BABYLON.Texture("./assets/ascree.jpg", scene, true, false)
