@@ -118,34 +118,34 @@ function SpawnHotspots(){
 }
 
 function FeedWithLogo(name, parent){
-    console.log(LogosLoaderTask.loadedMeshes[0])
+    //console.log(LogosLoaderTask.loadedMeshes[0])
     switch(name){
         case "1":
-            console.log("contact station");
+            //console.log("contact station");
             PositionLogo()
             break;
         case "2":
-            console.log("linde station");
+            //console.log("linde station");
             PositionLogo()
             break;
         case "3":
-            console.log("ar station")
+            //console.log("ar station")
             PositionLogo()
             break;
         case "4":
-            console.log("varycon station");
+            //console.log("varycon station");
             PositionLogo()
             break;
         case "5":
-            console.log("vr station");
+            //console.log("vr station");
             PositionLogo()
             break;
         case "6":
-            console.log("telekom staion");
+            //console.log("telekom staion");
             PositionLogo()
             break;
         case "7":
-            console.log("bombardier station");
+            //console.log("bombardier station");
             PositionLogo()
             break;
     }

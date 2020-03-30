@@ -12,7 +12,59 @@ function SetScene() {
     CreateInfoBox();
     SceneStarted = true;
 }
+var lastSelected = ""
+function openInfoUI(selec){
+    //handle infobox
+    switch(selec){
+        case "0":
+            document.getElementById("project-ssi-schaefer").style.display = "block";
+            lastSelected = document.getElementById("project-ssi-schaefer")
+            break;
+        case "1":
+            document.getElementById("project-linde").style.display = "block";
+            lastSelected = document.getElementById("project-ssi-schaefer")
+            break;
+        case "2":
+            document.getElementById("project-ssi-schaefer").style.display = "block";
+            lastSelected = document.getElementById("project-ssi-schaefer");
+            break;
+        case "3":
+            document.getElementById("project-varycon").style.display = "block";
+            lastSelected = document.getElementById("project-varycon")
+            break;
+        case "4":
+            document.getElementById("project-bayer-ag").style.display = "block";
+            lastSelected = document.getElementById("project-bayer-ag")
+            break;
+        case "5":
+            document.getElementById("project-deutsche-telekom").style.display = "block";
+            lastSelected = document.getElementById("project-deutsche-telekom")
+            break;
+        case "6":
+            document.getElementById("project-bombardier").style.display = "block";
+            lastSelected = document.getElementById("project-bombardier")
+            break;
+            
+    }
+    var length = 6
 
+    
+    //id selector->display:block or none
+
+}
+
+var click = 0
+$('.project-overlay').on('click', function(e){
+    e.preventDefault();
+    click++;
+    if(click>1){
+        console.log("hello overlay")
+        lastSelected.style.display = "none"
+        click =0;
+    }
+
+
+  });
 function SpawnInfobox(mesh, cam) {
     //console.log("hast collider tag?")
     //console.log(BABYLON.Tags.MatchesQuery(mesh, "hs_coll"))

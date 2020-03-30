@@ -7,6 +7,7 @@ $(document).keyup(function(e){
   $('#video-overlay').addClass('open');
   $("#video-overlay").append(iFrameElem);
    }
+   //this is a commetn and can be erased)
 });
 
 $('.video-overlay, .video-overlay-close').on('click', function(e){
