@@ -83,11 +83,10 @@ function CreateCustomMaterials(){
 
     //screenvideo materials
     mainScreenMat = new BABYLON.PBRMaterial("mainScreenMat", scene);
-    mainScreenVid = new BABYLON.VideoTexture("mainScreenVid", "./assets/Messestand_Format_2.mp4", scene);
+    mainScreenVid = new BABYLON.VideoTexture("mainScreenVid", "./assets/Retro 2017 (loop).mp4", scene);
     mainScreenVid.vScale = -1;
     mainScreenVid.uScale = 1;
     mainScreenVid.video.setAttribute('preload', 'none')
-    mainScreenVid.video.setAttribute('muted', 'true');
     mainScreenVid.video.setAttribute('loop', 'true')
     mainScreenVid.video.setAttribute('poster', './assets/ascree.jpg')
     mainScreenVid.video.load();

@@ -21,7 +21,7 @@ var createScene = function () {
     camera.angularSensibilityX = 3000
     camera.angularSensibilityy = 3000
     camera.wheelPrecision = 100
-    camera.attachControl(canvas, true);
+    camera.attachControl(canvas, true, false, false);
     var assetsManager = new BABYLON.AssetsManager(scene)
     LoadAssets(scene, assetsManager)
 
