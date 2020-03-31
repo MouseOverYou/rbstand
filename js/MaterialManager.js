@@ -88,7 +88,7 @@ function CreateCustomMaterials(){
     mainScreenVid.uScale = 1;
 
     mainScreenMat.emissiveTexture = mainScreenVid
-    //mainScreenMat.albedoTexture = mainScreenVid
+    mainScreenMat.albedoTexture = mainScreenVid
     mainScreenMat.reflectionTexture = hdrTexture;
     mainScreenMat.emissiveColor = new BABYLON.Color3.FromHexString("#ffffff")
     mainScreenMat.metallic = 0.75
