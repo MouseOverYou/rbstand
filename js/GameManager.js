@@ -55,11 +55,9 @@ $('.project-overlay').on('click', function(e){
     click++;
     console.log("hello overlay")
     console.log(click)
+    lastSelected.getElementsByClassName("film-values")[0].pause()
+    lastSelected.getElementsByClassName("film-values")[0].load()
     lastSelected.style.display = "none"
-
-    if(click>1){
-        click =0;
-    }
 
 
   });

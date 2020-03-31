@@ -196,7 +196,7 @@ var scene = createScene(); //Call the createScene function
 // Register a render loop to repeatedly render the scene
 engine.runRenderLoop(function () {
     scene.render();
-    TriggeroopAnimations()
+    TriggerLoopAnimations()
     var fpsLabel = document.getElementById("fpsLabel");
     fpsLabel.innerHTML = engine.getFps().toFixed() + " fps";
 });

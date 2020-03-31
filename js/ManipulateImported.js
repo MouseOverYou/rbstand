@@ -1,3 +1,6 @@
+let hsHolder = []
+let LogosHolder = []
+
 function ChangeRenderingOrder() {
     //for mesh "rendering order"
     for (var h = 0; h < slotMeshTask.loadedMeshes.length; h++) {
@@ -80,7 +83,7 @@ function AddGlow(){
 
 }
 
-let hsHolder = []
+
 function SpawnHotspots(){
     let counter = 0;
     let Hs_Clones = []
@@ -167,5 +170,7 @@ function FeedWithLogo(name, parent){
         var logoMesh = LogosLoaderTask.loadedMeshes[0].getChildMeshes()[0]
         logoMesh.parent = parent.parent.parent
         logoMesh.position = new BABYLON.Vector3(parent.parent.position.x, parent.parent.position.y + 55, parent.parent.position.z)
+        //holder for start animation
+        LogosHolder.push(logoMesh);
     }
 }

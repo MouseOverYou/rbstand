@@ -83,7 +83,7 @@ function CreateCustomMaterials(){
 
     //screenvideo materials
     mainScreenMat = new BABYLON.PBRMaterial("mainScreenMat", scene);
-    mainScreenVid = new BABYLON.VideoTexture("mainScreenVid", "./assets/Messestand_Format_3.mp4", scene);
+    mainScreenVid = new BABYLON.VideoTexture("mainScreenVid", "./assets/Messestand_Format_1.mp4", scene);
     mainScreenVid.vScale = -1;
     mainScreenVid.uScale = 1;
     mainScreenVid.video.preload = 'none'
@@ -100,10 +100,59 @@ function CreateCustomMaterials(){
     mainScreenMat.roughness = 0
 
 
+    screenMitte1 = new BABYLON.PBRMaterial("screenMitte1", scene);
+    vidMitte1 = new BABYLON.VideoTexture("vidMitte1", "./assets/screenVert_ref 4_1.mp4", scene);
+    vidMitte1.vScale = -1;
+    vidMitte1.uScale = 1;
+    screenMitte1.emissiveTexture = vidMitte1
+    screenMitte1.albedoTexture = vidMitte1
+    screenMitte1.reflectionTexture = hdrTexture;
+    screenMitte1.emissiveColor = new BABYLON.Color3.FromHexString("#ffffff")
+    screenMitte1.metallic = 0.75
+    screenMitte1.roughness = 0
 
+    screenMitte2 = new BABYLON.PBRMaterial("screenMitte2", scene);
+    vidMitte2 = new BABYLON.VideoTexture("vidMitte2", "./assets/screenVert_ref 2.mp4", scene);
+    vidMitte2.vScale = -1;
+    vidMitte2.uScale = 1;
+    screenMitte2.emissiveTexture = vidMitte2
+    screenMitte2.albedoTexture = vidMitte2
+    screenMitte2.reflectionTexture = hdrTexture;
+    screenMitte2.emissiveColor = new BABYLON.Color3.FromHexString("#ffffff")
+    screenMitte2.metallic = 0.75
+    screenMitte2.roughness = 0
+
+    screenMitte3 = new BABYLON.PBRMaterial("screenMitte3", scene);
+    vidMitte3 = new BABYLON.VideoTexture("vidMitte3", "./assets/screenVert_ref 3.mp4", scene);
+    vidMitte3.vScale = -1;
+    vidMitte3.uScale = 1;
+    screenMitte3.emissiveTexture = vidMitte3
+    screenMitte3.albedoTexture = vidMitte3
+    screenMitte3.reflectionTexture = hdrTexture;
+    screenMitte3.emissiveColor = new BABYLON.Color3.FromHexString("#ffffff")
+    screenMitte3.metallic = 0.75
+    screenMitte3.roughness = 0
+/*
+    screenMitte4 = new BABYLON.PBRMaterial("screenMitte4", scene);
+    vidMitte4 = new BABYLON.VideoTexture("vidMitte4", "./assets/screenVert_ref 4.mp4", scene);
+    vidMitte4.vScale = -1;
+    vidMitte4.uScale = 1;
+    vidMitte4.video.muted = "true"
+    vidMitte4.video.play()
+    screenMitte4.emissiveTexture = vidMitte4
+    screenMitte4.albedoTexture = vidMitte4
+    screenMitte4.reflectionTexture = hdrTexture;
+    screenMitte4.emissiveColor = new BABYLON.Color3.FromHexString("#ffffff")
+    screenMitte4.metallic = 0.75
+    screenMitte4.roughness = 0
+*/
     
 }
 function ChangeMeshesMaterials(){
     scene.getMeshByName("Screen_Main_1").material = mainScreenMat;
     scene.getMeshByName("Screen_Main_2").material = mainScreenMat;
-}
+    scene.getMeshByName("Screen_mitte_1").material = screenMitte1;
+    scene.getMeshByName("Screen_mitte_2").material = screenMitte2;
+    scene.getMeshByName("Screen_mitte_3").material = screenMitte1;
+    scene.getMeshByName("Screen_mitte_4").material = screenMitte3;
+} 
