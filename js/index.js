@@ -168,7 +168,7 @@ var createScene = function () {
             console.log(pickInfo.pickedMesh.name);
             CurrentSelection = pickInfo.pickedMesh.name.split('hs Collider ')[1];
             console.log(CurrentSelection)
-            //openInfoUI(currentSelection)
+            openInfoUI(CurrentSelection)
             SpawnInfobox(pickInfo.pickedMesh, camera)
 
         }

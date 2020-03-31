@@ -46,10 +46,6 @@ function openInfoUI(selec){
             break;
             
     }
-    var length = 6
-
-    
-    //id selector->display:block or none
 
 }
 
