@@ -175,7 +175,11 @@ var createScene = function () {
     }
     var count =0;
     scene.onPointerUp = function () {
-        mainScreenVid.video.play();
+
+        if(count == 0){
+            mainScreenVid.video.play();
+        }
+
         count++;
         debugLabel.innerHTML = "number of pointer ups " +count;
     }
