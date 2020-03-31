@@ -62,7 +62,6 @@ $('.project-overlay').on('click', function(e){
     lastSelected.style.display = "none"
 
     if(click>1){
-
         click =0;
     }
 

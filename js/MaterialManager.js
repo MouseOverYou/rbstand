@@ -77,8 +77,8 @@ function CreateCustomMaterials(){
     iMat.opacityTexture = iMatTextVideo;
 
     colMat = new BABYLON.StandardMaterial("colMat", scene)
-    colMat.wireframe = true
-    colMat.alpha = 1
+    colMat.wireframe = false
+    colMat.alpha = 0
 
     //screenvideo materials
     mainScreenMat = new BABYLON.PBRMaterial("mainScreenMat", scene);
