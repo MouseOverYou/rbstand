@@ -181,6 +181,10 @@ var createScene = function () {
 
         if(count == 0){
             mainScreenVid.video.play();
+            vidMitte1.video.play();
+            vidMitte2.video.play();
+            vidMitte3.video.play();
+            vidMitte4.video.play();
         }
 
         count++;

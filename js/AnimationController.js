@@ -76,13 +76,11 @@ function TriggerLoopAnimations() {
 }
 
 function BufferStartAnimation(){
-    LogosHolder.forEach(logo => {
-        startTween.from(logo.scaling, {y:0, duration:0.1});
-    });
-    ArrowsHolder.forEach(arrow => {
-        startTween.from(arrow.scaling, {y:0, duration:0.1});
-    });
-    startTween.pause()
+    for(var i = 0; i <= 6; i++){
+        startTween.from(ArrowsHolder[i].scaling, {y:0, duration:0.5}, "<");
+        startTween.from(LogosHolder[i].scaling, {y:0, duration:0.5}, "<");
+    }
+    //startTween.pause()
 
 
 }

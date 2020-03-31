@@ -83,27 +83,28 @@ function CreateCustomMaterials(){
 
     //screenvideo materials
     mainScreenMat = new BABYLON.PBRMaterial("mainScreenMat", scene);
-    mainScreenVid = new BABYLON.VideoTexture("mainScreenVid", "./assets/Messestand_Format_1.mp4", scene);
+    mainScreenVid = new BABYLON.VideoTexture("mainScreenVid", "./assets/Retro 2017 (loop).mp4", scene, false);
     mainScreenVid.vScale = -1;
     mainScreenVid.uScale = 1;
-    mainScreenVid.video.preload = 'none'
-    mainScreenVid.video.muted = true
-    mainScreenVid.video.loop = true
-    mainScreenVid.video.poster = './assets/ascree.jpg'
-    mainScreenVid.video.load();
 
     mainScreenMat.emissiveTexture = mainScreenVid
-    mainScreenMat.albedoTexture = mainScreenVid
+    //mainScreenMat.albedoTexture = mainScreenVid
     mainScreenMat.reflectionTexture = hdrTexture;
     mainScreenMat.emissiveColor = new BABYLON.Color3.FromHexString("#ffffff")
     mainScreenMat.metallic = 0.75
     mainScreenMat.roughness = 0
 
+    mainScreenMat.emissiveTexture.video.setAttribute('webkit-playsinline', 'webkit-playsinline');
+    mainScreenMat.emissiveTexture.video.setAttribute('playsinline', 'true');
+    mainScreenMat.emissiveTexture.video.setAttribute('muted', 'true');
+    mainScreenMat.emissiveTexture.video.setAttribute('autoplay', 'true');
+
 
     screenMitte1 = new BABYLON.PBRMaterial("screenMitte1", scene);
-    vidMitte1 = new BABYLON.VideoTexture("vidMitte1", "./assets/screenVert_ref 4_1.mp4", scene);
+    vidMitte1 = new BABYLON.VideoTexture("vidMitte1", "./assets/screenVert_ref 4_1.mp4", scene, {poster: "./assets/ascree.jpg"});
     vidMitte1.vScale = -1;
     vidMitte1.uScale = 1;
+    vidMitte1.video.load();
     screenMitte1.emissiveTexture = vidMitte1
     screenMitte1.albedoTexture = vidMitte1
     screenMitte1.reflectionTexture = hdrTexture;
@@ -112,9 +113,10 @@ function CreateCustomMaterials(){
     screenMitte1.roughness = 0
 
     screenMitte2 = new BABYLON.PBRMaterial("screenMitte2", scene);
-    vidMitte2 = new BABYLON.VideoTexture("vidMitte2", "./assets/screenVert_ref 2.mp4", scene);
+    vidMitte2 = new BABYLON.VideoTexture("vidMitte2", "./assets/screenVert_ref 2.mp4", scene, {poster: "./assets/ascree.jpg"});
     vidMitte2.vScale = -1;
     vidMitte2.uScale = 1;
+    vidMitte2.video.load();
     screenMitte2.emissiveTexture = vidMitte2
     screenMitte2.albedoTexture = vidMitte2
     screenMitte2.reflectionTexture = hdrTexture;
@@ -126,6 +128,7 @@ function CreateCustomMaterials(){
     vidMitte3 = new BABYLON.VideoTexture("vidMitte3", "./assets/screenVert_ref 3.mp4", scene);
     vidMitte3.vScale = -1;
     vidMitte3.uScale = 1;
+    vidMitte3.video.load();
     screenMitte3.emissiveTexture = vidMitte3
     screenMitte3.albedoTexture = vidMitte3
     screenMitte3.reflectionTexture = hdrTexture;
@@ -134,11 +137,12 @@ function CreateCustomMaterials(){
     screenMitte3.roughness = 0
 
     screenMitte4 = new BABYLON.PBRMaterial("screenMitte4", scene);
-    vidMitte4 = new BABYLON.VideoTexture("vidMitte4", "./assets/screenVert_ref.mp4", scene);
+    vidMitte4 = new BABYLON.VideoTexture("vidMitte4", "./assets/screenVert_ref.mp4", scene, {poster: "./assets/ascree.jpg"});
     vidMitte4.vScale = -1;
     vidMitte4.uScale = 1;
-    vidMitte4.video.muted = "true"
-    vidMitte4.video.play()
+    vidMitte4.video.load();
+    //vidMitte4.video.muted = "true"
+    //vidMitte4.video.play()
     screenMitte4.emissiveTexture = vidMitte4
     screenMitte4.albedoTexture = vidMitte4
     screenMitte4.reflectionTexture = hdrTexture;
