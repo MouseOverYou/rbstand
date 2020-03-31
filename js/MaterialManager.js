@@ -83,7 +83,7 @@ function CreateCustomMaterials(){
 
     //screenvideo materials
     mainScreenMat = new BABYLON.PBRMaterial("mainScreenMat", scene);
-    mainScreenVid = new BABYLON.VideoTexture("mainScreenVid", "./Messestand_Format_1.mp4", scene, false);
+    mainScreenVid = new BABYLON.VideoTexture("mainScreenVid", "./assets/Messestand_Format_1.mp4", scene, false);
     mainScreenVid.vScale = -1;
     mainScreenVid.uScale = 1;
 
