@@ -7,6 +7,20 @@ body {
     padding: 0;
 }
 
+#fpsLabel {
+  position: absolute;
+  top: 25px;
+  z-index: 3;
+  background: blanchedalmond
+}
+
+#debugLabel {
+  position: absolute;
+  top: 5px;
+  z-index: 3;
+  background: blanchedalmond
+}
+
 .back-zoom {
   position: absolute;
   z-index: 1000;

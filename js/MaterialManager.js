@@ -97,7 +97,7 @@ function CreateCustomMaterials(){
     htmlVideo.setAttribute('playsinline', 'true');
     htmlVideo.setAttribute('muted', 'true');
     htmlVideo.setAttribute('autoplay', 'true');
-    htmlVideo.play();
+    //htmlVideo.play();
 
     
 }
