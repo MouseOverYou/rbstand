@@ -86,9 +86,10 @@ function CreateCustomMaterials(){
     mainScreenVid = new BABYLON.VideoTexture("mainScreenVid", "./assets/Retro 2017 (loop).mp4", scene);
     mainScreenVid.vScale = -1;
     mainScreenVid.uScale = 1;
-    mainScreenVid.video.setAttribute('preload', 'none')
-    mainScreenVid.video.setAttribute('loop', 'true')
-    mainScreenVid.video.setAttribute('poster', './assets/ascree.jpg')
+    mainScreenVid.video.preload = 'none'
+    mainScreenVid.video.muted = true
+    mainScreenVid.video.loop = true
+    mainScreenVid.video.poster = 'poster', './assets/ascree.jpg'
     mainScreenVid.video.load();
 
     mainScreenMat.emissiveTexture = mainScreenVid
