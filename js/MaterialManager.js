@@ -83,21 +83,22 @@ function CreateCustomMaterials(){
 
     //screenvideo materials
     mainScreenMat = new BABYLON.PBRMaterial("mainScreenMat", scene);
-    mainScreenVid = new BABYLON.VideoTexture("mainScreenVid", "./Messestand_Format_1.mp4", scene, false);
+    mainScreenVid = new BABYLON.VideoTexture("mainScreenVid", "./assets/Messestand_Format_1.mp4", scene);
     mainScreenVid.vScale = -1;
     mainScreenVid.uScale = 1;
 
     mainScreenMat.emissiveTexture = mainScreenVid
-    //mainScreenMat.albedoTexture = mainScreenVid
+    mainScreenMat.albedoTexture = mainScreenVid
     mainScreenMat.reflectionTexture = hdrTexture;
     mainScreenMat.emissiveColor = new BABYLON.Color3.FromHexString("#ffffff")
     mainScreenMat.metallic = 0.75
     mainScreenMat.roughness = 0
 
-    mainScreenMat.emissiveTexture.video.setAttribute('webkit-playsinline', 'webkit-playsinline');
-    mainScreenMat.emissiveTexture.video.setAttribute('playsinline', 'true');
-    mainScreenMat.emissiveTexture.video.setAttribute('muted', 'true');
-    mainScreenMat.emissiveTexture.video.setAttribute('autoplay', 'true');
+    
+    mainScreenVid.video.setAttribute('webkit-playsinline', 'webkit-playsinline');
+    mainScreenVid.video.setAttribute('playsinline', 'true');
+    mainScreenVid.video.setAttribute('muted', 'true');
+    mainScreenVid.video.setAttribute('autoplay', 'true');
 
 
     screenMitte1 = new BABYLON.PBRMaterial("screenMitte1", scene);
