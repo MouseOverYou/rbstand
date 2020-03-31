@@ -77,12 +77,12 @@ function CreateCustomMaterials(){
     iMat.opacityTexture = iMatTextVideo;
 
     colMat = new BABYLON.StandardMaterial("colMat", scene)
-    colMat.wireframe = true
-    colMat.alpha = 1
+    colMat.wireframe = false
+    colMat.alpha = 0
 
     //screenvideo materials
     mainScreenMat = new BABYLON.PBRMaterial("mainScreenMat", scene);
-    mainScreenVid = new BABYLON.VideoTexture("mainScreenVid", "./assets/Messestand_Format_1.mp4", scene, true, false);
+    mainScreenVid = new BABYLON.VideoTexture("mainScreenVid", "./assets/Messestand_Format_2.mp4", scene, true, false);
     mainScreenVid.vScale = -1;
     mainScreenVid.uScale = 1;
     mainScreenMat.emissiveTexture = mainScreenVid
@@ -97,7 +97,6 @@ function CreateCustomMaterials(){
     htmlVideo.setAttribute('playsinline', 'true');
     htmlVideo.setAttribute('muted', 'true');
     htmlVideo.setAttribute('autoplay', 'true');
-    //htmlVideo.play();
 
     
 }
