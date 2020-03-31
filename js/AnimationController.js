@@ -15,13 +15,48 @@ function lookHS(mesh) {
     let v1 = mesh.getAbsolutePosition().subtract(v0);
 
     v1.normalize();
-    let angle = Math.atan2(v1.z, v1.x) 
-    let angleInDegree = BABYLON.Tools.ToDegrees(angle) +180
-    //let newAlpha = angleInDegree - 90 ;
+    let angleAlpha = Math.atan2(v1.z, v1.x)
+    let angleBeta = 100;
+ 
+    let angleInDegree = BABYLON.Tools.ToDegrees(angleAlpha) +180
     console.log("angle is " + angleInDegree)
     
-    camera.setTarget(origin)
-    camTween.to(camera, { alpha: angle + Math.PI, beta: 100 * (Math.PI / 180),  radius: 0.1, duration: 1} )
+    //change values per selection
+    switch(CurrentSelection){
+        case "1":
+            camera.setTarget(origin)
+            camTween.to(camera, { alpha: 90 * (Math.PI / 180), beta: 95 * (Math.PI / 180),  radius: 1.5, duration: 1} )
+            break;
+        case "2":
+            camera.setTarget(origin)
+            camTween.to(camera, { alpha: angleAlpha + Math.PI, beta: (angleBeta - 10) * (Math.PI / 180),  radius: 0.005, duration: 1} )
+            break;
+        case "3":
+            camera.setTarget(origin)
+            camTween.to(camera, { alpha: angleAlpha + Math.PI, beta: (angleBeta - 5) * (Math.PI / 180),  radius: 0.1, duration: 1} )
+            break;
+        case "4":
+            //varycon
+            camera.setTarget(origin)
+            camTween.to(camera, { alpha: angleAlpha + Math.PI, beta: (angleBeta - 3.5) * (Math.PI / 180),  radius: 0.1, duration: 1} )
+            break;
+        case "5":
+            camera.setTarget(origin)
+            camTween.to(camera, { alpha: angleAlpha + Math.PI, beta: (angleBeta - 5)* (Math.PI / 180),  radius: 0.07, duration: 1} )
+            break;
+        case "6":
+            camera.setTarget(origin)
+            camTween.to(camera, { alpha: angleAlpha + Math.PI, beta: (angleBeta - 10) * (Math.PI / 180),  radius: 0.005, duration: 1} )
+            break;
+        case "7":
+            camera.setTarget(origin)
+            camTween.to(camera, { alpha: angleAlpha + Math.PI, beta: angleBeta * (Math.PI / 180),  radius: 0.7, duration: 1} )
+            break;
+            
+    }
+
+    //camera.setTarget(origin)
+    //camTween.to(camera, { alpha: angleAlpha + Math.PI, beta: angleBeta * (Math.PI / 180),  radius: 0.1, duration: 1} )
 }
 
 function zoomCamOut(){

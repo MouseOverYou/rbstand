@@ -4,6 +4,7 @@ var engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine
 var myGUI
 var fillLight, lightLinks, lightRechts, shadowGenerator
 var camera;
+var CurrentSelection
 
 
 /******* Add the create scene function ******/
@@ -15,7 +16,7 @@ var createScene = function () {
     // Add a camera to the scene and attach it to the canvas
     camera = new BABYLON.ArcRotateCamera("Camera", 90 * (Math.PI / 180), 82 * (Math.PI / 180), 2.8, new BABYLON.Vector3(0, 0.1, 0), scene);
     camera.minZ = 0.1
-    camera.lowerRadiusLimit = 0.1
+    camera.lowerRadiusLimit = 0
     camera.upperRadiusLimit = 4
     camera.angularSensibilityX = 3000
     camera.angularSensibilityy = 3000
@@ -164,11 +165,12 @@ var createScene = function () {
 
         var pickInfo = scene.pick(scene.pointerX, scene.pointerY, function (mesh) { return mesh.name !== "ground1" && mesh.isPickable; });
         if (pickInfo && pickInfo.pickedMesh) {
-            SpawnInfobox(pickInfo.pickedMesh, camera)
             console.log(pickInfo.pickedMesh.name);
-            var selection = pickInfo.pickedMesh.name.split('hs Collider ')[1];
-            console.log(selection)
-            openInfoUI(selection)
+            CurrentSelection = pickInfo.pickedMesh.name.split('hs Collider ')[1];
+            console.log(CurrentSelection)
+            //openInfoUI(currentSelection)
+            SpawnInfobox(pickInfo.pickedMesh, camera)
+
         }
     }
 

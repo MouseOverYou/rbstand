@@ -105,7 +105,7 @@ function SpawnHotspots(){
 
             hsColl = new BABYLON.MeshBuilder.CreateBox("hs Collider " + counter, { height: 40, width: 40, depth: 10 }, scene)
             hsColl.material = colMat
-            hsColl.parent = elem;
+            hsColl.parent = clone;
             hsColl.isPickable = true;
             BABYLON.Tags.AddTagsTo(hsColl, "hs_coll");
             hsHolder.push(clone);

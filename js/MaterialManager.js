@@ -77,21 +77,27 @@ function CreateCustomMaterials(){
     iMat.opacityTexture = iMatTextVideo;
 
     colMat = new BABYLON.StandardMaterial("colMat", scene)
-    colMat.wireframe = false
-    colMat.alpha = 0
+    colMat.wireframe = true
+    colMat.alpha = 1
 
     //screenvideo materials
     mainScreenMat = new BABYLON.PBRMaterial("mainScreenMat", scene);
     mainScreenVid = new BABYLON.VideoTexture("mainScreenVid", "./assets/Messestand_Format_1.mp4", scene, true, false);
     mainScreenVid.vScale = -1;
     mainScreenVid.uScale = 1;
-    mainScreenVid.video.pause();
     mainScreenMat.emissiveTexture = mainScreenVid
     mainScreenMat.albedoTexture = mainScreenVid
     mainScreenMat.reflectionTexture = hdrTexture;
     mainScreenMat.emissiveColor = new BABYLON.Color3.FromHexString("#ffffff")
     mainScreenMat.metallic = 0.75
     mainScreenMat.roughness = 0
+
+    var htmlVideo = mainScreenMat.emissiveTexture.video;
+    htmlVideo.setAttribute('webkit-playsinline', 'webkit-playsinline');
+    htmlVideo.setAttribute('playsinline', 'true');
+    htmlVideo.setAttribute('muted', 'true');
+    htmlVideo.setAttribute('autoplay', 'true');
+    htmlVideo.play();
 
     
 }
