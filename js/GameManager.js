@@ -11,6 +11,7 @@ function SetScene() {
     SpawnHotspots();
     CreateInfoBox();
     SceneStarted = true;
+    BufferStartAnimation()
 }
 var lastSelected = ""
 function openInfoUI(selec){

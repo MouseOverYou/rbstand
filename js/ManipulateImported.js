@@ -1,5 +1,6 @@
 let hsHolder = []
 let LogosHolder = []
+let ArrowsHolder = []
 
 function ChangeRenderingOrder() {
     //for mesh "rendering order"
@@ -116,6 +117,7 @@ function SpawnHotspots(){
         else if(elem.name.startsWith("Arrow_")){
             //create Colliders
             elem.visibility = false;
+            ArrowsHolder.push(elem.parent)
             FeedWithLogo(elem.name.split("_")[1], elem)
             /*
 

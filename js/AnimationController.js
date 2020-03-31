@@ -1,5 +1,6 @@
 var particleSystem, emitterReveal, swooshParticles, rainSystem, loseParticles
 var tween = gsap.timeline();
+var startTween = gsap.timeline();
 let origin = new BABYLON.Vector3(0, 0.26, 0);
 
 function camAnim() {
@@ -74,10 +75,15 @@ function TriggerLoopAnimations() {
 
 }
 
-function StartAnimation(){
+function BufferStartAnimation(){
     LogosHolder.forEach(logo => {
-        tween.fromTo(logo.scaling,{y:0}, {y:1, duration:0.3})
+        startTween.from(logo.scaling, {y:0, duration:0.1});
     });
+    ArrowsHolder.forEach(arrow => {
+        startTween.from(arrow.scaling, {y:0, duration:0.1});
+    });
+    startTween.pause()
+
 
 }
 
