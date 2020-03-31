@@ -89,7 +89,7 @@ function CreateCustomMaterials(){
     mainScreenVid.video.preload = 'none'
     mainScreenVid.video.muted = true
     mainScreenVid.video.loop = true
-    mainScreenVid.video.poster = 'poster', './assets/ascree.jpg'
+    mainScreenVid.video.poster = './assets/ascree.jpg'
     mainScreenVid.video.load();
 
     mainScreenMat.emissiveTexture = mainScreenVid
