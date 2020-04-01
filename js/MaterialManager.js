@@ -101,17 +101,22 @@ function CreateCustomMaterials(){
 
     //screenvideo materials
     mainScreenMat = new BABYLON.PBRMaterial("mainScreenMat", scene);
+<<<<<<< HEAD
     mainScreenVid = new BABYLON.VideoTexture("mainScreenVid", "./assets/Messestand Format hb 2.mp4", scene, false);
+=======
+    mainScreenVid = new BABYLON.VideoTexture("mainScreenVid", "./assets/Messestand_Format_1.mp4", scene);
+>>>>>>> e82ce2158c9a70ee27391855f20f97efcca336f6
     mainScreenVid.vScale = -1;
     mainScreenVid.uScale = 1;
 
     mainScreenMat.emissiveTexture = mainScreenVid
-    //mainScreenMat.albedoTexture = mainScreenVid
+    mainScreenMat.albedoTexture = mainScreenVid
     mainScreenMat.reflectionTexture = hdrTexture;
     mainScreenMat.emissiveColor = new BABYLON.Color3.FromHexString("#ffffff")
     mainScreenMat.metallic = 0.75
     mainScreenMat.roughness = 0
 
+<<<<<<< HEAD
     mainScreenMat.emissiveTexture.video.setAttribute('webkit-playsinline', 'webkit-playsinline');
     mainScreenMat.emissiveTexture.video.setAttribute('playsinline', 'true');
     mainScreenMat.emissiveTexture.video.setAttribute('autoplay', 'true');
@@ -120,6 +125,15 @@ function CreateCustomMaterials(){
     mainScreenMat.emissiveTexture.video.setAttribute('muted', 'true');
     mainScreenMat.emissiveTexture.video.setAttribute('autoplay', 'true');
     
+=======
+    
+    mainScreenVid.video.setAttribute('webkit-playsinline', 'webkit-playsinline');
+    mainScreenVid.video.setAttribute('playsinline', 'true');
+    mainScreenVid.video.setAttribute('muted', 'true');
+    mainScreenVid.video.setAttribute('autoplay', 'true');
+
+
+>>>>>>> e82ce2158c9a70ee27391855f20f97efcca336f6
     screenMitte1 = new BABYLON.PBRMaterial("screenMitte1", scene);
     vidMitte1 = new BABYLON.VideoTexture("vidMitte1", "./assets/screenVert_ref 4_1.mp4", scene, {poster: "./assets/ascree.jpg"});
     vidMitte1.vScale = -1;
