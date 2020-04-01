@@ -211,15 +211,39 @@ function run() {
     });    
 }
 
+var vids = document.getElementsByClassName("scene-vid");
+var currentVid =0;
+
+function loadLoop(){
+    console.log(currentVid)
+    if(currentVid==5){
+        run();
+        return;
+    }
+    vids[currentVid].load();
+    videoLoaded = false;
+    vids[currentVid].addEventListener("canplaythrough", function() {
+        if (!videoLoaded) {
+            videoLoaded = true;
+            console.log("video: " + currentVid + " can play through.");
+            document.getElementsByClassName("scene-vid")[currentVid].play();
+            renderLoopEnabled = true;
+            currentVid += 1;
+            loadLoop()
+        }
+    });
+}
+
+//thomas function working
 function loadVideo() {
     console.log("Loading video.");
-    var vid = document.getElementById("vid");
-    vid.load();
-    vid.addEventListener("canplaythrough", function() {
+    var vid = document.getElementsByClassName("scene-vid");
+    vid[0].load();
+    vid[0].addEventListener("canplaythrough", function() {
         if (!videoLoaded) {
             videoLoaded = true;
             console.log("Can play through.");
-            document.getElementById("vid").play();
+            document.getElementsByClassName("scene-vid")[0].play();
             renderLoopEnabled = true;
             run();
         }
@@ -233,7 +257,7 @@ function loadVideo() {
     }
 });*/
 
-loadVideo();
+loadLoop();
 
 
 // Watch for browser/canvas resize events
