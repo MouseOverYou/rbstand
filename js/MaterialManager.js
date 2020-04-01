@@ -81,10 +81,15 @@ function CreateCustomMaterials(){
     colMat.wireframe = false
     colMat.alpha = 0
 
-    videoMat = new BABYLON.PBRMaterial("textVid", scene);
-    videoMat.emissiveTexture = new BABYLON.VideoTexture("video", document.getElementById("vid"), scene,false,false, {poster:"./assets/sky2.png"});
-    videoMat.backFaceCulling = false;
-    videoMat.emissiveColor = new BABYLON.Color3.FromHexString("#ffffff")
+    mainScreenMat = new BABYLON.PBRMaterial("textVid", scene);
+    mainScreenVid = new BABYLON.VideoTexture("video", document.getElementById("vid"), scene,false,false, {poster:"./assets/sky2.png"});
+    mainScreenMat.emissiveTexture = mainScreenVid
+    mainScreenMat.albedoTexture = mainScreenVid
+    mainScreenMat.reflectionTexture = hdrTexture;
+    mainScreenVid.vScale = -1;
+    mainScreenVid.uScale = 1;
+    mainScreenMat.backFaceCulling = false;
+    mainScreenMat.emissiveColor = new BABYLON.Color3.FromHexString("#ffffff")
     //Applying materials
 	
 /*    htmlVideo = videoMat.emissiveTexture.video;
@@ -174,8 +179,8 @@ function CreateCustomMaterials(){
     
 }
 function ChangeMeshesMaterials(){
-    scene.getMeshByName("Screen_Main_1").material = videoMat;
-    scene.getMeshByName("Screen_Main_2").material = videoMat;
+    scene.getMeshByName("Screen_Main_1").material = mainScreenMat;
+    scene.getMeshByName("Screen_Main_2").material = mainScreenMat;
     /*
     scene.getMeshByName("Screen_mitte_1").material = screenMitte1;
     scene.getMeshByName("Screen_mitte_2").material = screenMitte2;
