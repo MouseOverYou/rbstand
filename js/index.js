@@ -18,7 +18,7 @@ var createScene = function () {
     camera.minZ = 0.1
     camera.panningDistanceLimit = 0;
     camera.pinchToPanMaxDistance = 0;
-    camera.panningSensibility =0
+    camera.panningSensibility = 0
     camera.lowerRadiusLimit = 0
     camera.upperRadiusLimit = 4
     camera.angularSensibilityX = 3000
@@ -28,7 +28,7 @@ var createScene = function () {
     var assetsManager = new BABYLON.AssetsManager(scene)
     LoadAssets(scene, assetsManager)
 
-    lightLinks = new BABYLON.DirectionalLight("lightLinks", new BABYLON.Vector3(-60, -41,-90), scene);
+    lightLinks = new BABYLON.DirectionalLight("lightLinks", new BABYLON.Vector3(-60, -41, -90), scene);
     lightLinks.position = new BABYLON.Vector3(1, 1, 0);
     lightLinks.intensity = 2
 
@@ -176,20 +176,29 @@ var createScene = function () {
 
         }
     }
-    var count =0;
+    var count = 0;
     scene.onPointerUp = function () {
 
-        if(count == 0){
-            mainScreenVid.video.play();
-            vidMitte1.video.play();
-            vidMitte2.video.play();
-            vidMitte3.video.play();
-            vidMitte4.video.play();
+        if (count == 0) {
+            //htmlVideo.video.load();
+            console.log("loading call")
+            var promise = htmlVideo.load();
+
+            if (promise !== undefined) {
+                promise.then(function () {
+                    console.log("video was loaded")
+                }).catch(function (error) {
+                    console.log("error while loading")
+                });
         }
 
         count++;
-        debugLabel.innerHTML = "number of pointer ups " +count;
-    }
+        debugLabel.innerHTML = "number of pointer ups " + count;
+        }
+        else{
+            htmlVideo.play();
+        }
+}
     return scene;
 };
 /******* End of the create scene function ******/
