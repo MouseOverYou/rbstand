@@ -180,24 +180,13 @@ var createScene = function () {
     scene.onPointerUp = function () {
 
         if (count == 0) {
-            //htmlVideo.video.load();
-            console.log("loading call")
-            var promise = htmlVideo.load();
-
-            if (promise !== undefined) {
-                promise.then(function () {
-                    console.log("video was loaded")
-                }).catch(function (error) {
-                    console.log("error while loading")
-                });
+            htmlVideo.play();
         }
 
         count++;
         debugLabel.innerHTML = "number of pointer ups " + count;
-        }
-        else{
-            htmlVideo.play();
-        }
+
+
 }
     return scene;
 };

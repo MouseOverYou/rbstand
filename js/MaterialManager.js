@@ -82,17 +82,18 @@ function CreateCustomMaterials(){
     colMat.alpha = 0
 
     videoMat = new BABYLON.PBRMaterial("textVid", scene);
-    videoMat.emissiveTexture = new BABYLON.VideoTexture("video", "./assets/Messestand Format hb 2.mp4", scene,false,false,BABYLON.VideoTexture.TRILINEAR_SAMPLINGMODE, {autoplay: "true", poster:"./assets/sky2.png"});
+    videoMat.emissiveTexture = new BABYLON.VideoTexture("video", "./assets/Messestand_Format_1.mp4", scene,false,false, {autoplay: "true", poster:"./assets/sky2.png"});
     videoMat.backFaceCulling = false;
     videoMat.emissiveColor = new BABYLON.Color3.FromHexString("#ffffff")
     //Applying materials
 	
     htmlVideo = videoMat.emissiveTexture.video;
-    htmlVideo.setAttribute('preload', 'false');
+    htmlVideo.setAttribute('preload', 'true');
     htmlVideo.setAttribute('webkit-playsinline', 'webkit-playsinline');
     htmlVideo.setAttribute('playsinline', 'true');
     htmlVideo.setAttribute('muted', 'true');
-    //htmlVideo.play();
+    htmlVideo.setAttribute('autoplay', 'true');
+    htmlVideo.load();
 
 
 
@@ -101,11 +102,7 @@ function CreateCustomMaterials(){
 
     //screenvideo materials
     mainScreenMat = new BABYLON.PBRMaterial("mainScreenMat", scene);
-<<<<<<< HEAD
     mainScreenVid = new BABYLON.VideoTexture("mainScreenVid", "./assets/Messestand Format hb 2.mp4", scene, false);
-=======
-    mainScreenVid = new BABYLON.VideoTexture("mainScreenVid", "./assets/Messestand_Format_1.mp4", scene);
->>>>>>> e82ce2158c9a70ee27391855f20f97efcca336f6
     mainScreenVid.vScale = -1;
     mainScreenVid.uScale = 1;
 
@@ -116,7 +113,6 @@ function CreateCustomMaterials(){
     mainScreenMat.metallic = 0.75
     mainScreenMat.roughness = 0
 
-<<<<<<< HEAD
     mainScreenMat.emissiveTexture.video.setAttribute('webkit-playsinline', 'webkit-playsinline');
     mainScreenMat.emissiveTexture.video.setAttribute('playsinline', 'true');
     mainScreenMat.emissiveTexture.video.setAttribute('autoplay', 'true');
@@ -125,15 +121,6 @@ function CreateCustomMaterials(){
     mainScreenMat.emissiveTexture.video.setAttribute('muted', 'true');
     mainScreenMat.emissiveTexture.video.setAttribute('autoplay', 'true');
     
-=======
-    
-    mainScreenVid.video.setAttribute('webkit-playsinline', 'webkit-playsinline');
-    mainScreenVid.video.setAttribute('playsinline', 'true');
-    mainScreenVid.video.setAttribute('muted', 'true');
-    mainScreenVid.video.setAttribute('autoplay', 'true');
-
-
->>>>>>> e82ce2158c9a70ee27391855f20f97efcca336f6
     screenMitte1 = new BABYLON.PBRMaterial("screenMitte1", scene);
     vidMitte1 = new BABYLON.VideoTexture("vidMitte1", "./assets/screenVert_ref 4_1.mp4", scene, {poster: "./assets/ascree.jpg"});
     vidMitte1.vScale = -1;
