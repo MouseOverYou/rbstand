@@ -34,7 +34,8 @@ $(document).keyup(function(e){
   //if keypress "r"
   if(e.keyCode === 82) { 
     console.log("r Keyboard")
-    startTween.restart()
+    //startTween.restart()
+    startTween.restart();
    }
 });
 

@@ -82,18 +82,18 @@ function CreateCustomMaterials(){
     colMat.alpha = 0
 
     videoMat = new BABYLON.PBRMaterial("textVid", scene);
-    videoMat.emissiveTexture = new BABYLON.VideoTexture("video", "./assets/Messestand_Format_1.mp4", scene,false,false, {autoplay: "true", poster:"./assets/sky2.png"});
+    videoMat.emissiveTexture = new BABYLON.VideoTexture("video", document.getElementById("vid"), scene,false,false, {poster:"./assets/sky2.png"});
     videoMat.backFaceCulling = false;
     videoMat.emissiveColor = new BABYLON.Color3.FromHexString("#ffffff")
     //Applying materials
 	
-    htmlVideo = videoMat.emissiveTexture.video;
+/*    htmlVideo = videoMat.emissiveTexture.video;
     htmlVideo.setAttribute('preload', 'true');
     htmlVideo.setAttribute('webkit-playsinline', 'webkit-playsinline');
     htmlVideo.setAttribute('playsinline', 'true');
     htmlVideo.setAttribute('muted', 'true');
-    htmlVideo.setAttribute('autoplay', 'true');
-    htmlVideo.load();
+    htmlVideo.setAttribute('autoplay', 'true');*/
+//    htmlVideo.load();
 
 
 

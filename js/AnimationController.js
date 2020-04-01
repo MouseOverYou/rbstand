@@ -1,13 +1,14 @@
 var particleSystem, emitterReveal, swooshParticles, rainSystem, loseParticles
 var tween = gsap.timeline();
 var startTween = gsap.timeline();
+var startCamTween = gsap.timeline();
 let origin = new BABYLON.Vector3(0, 0.26, 0);
 
 function camAnim() {
 
     //tween.fromTo(camera, {beta: 180*(Math.PI/180)}, {beta: 82*(Math.PI/180), duration: 1});
-    //tween.set(camera, {alpha: 90*(Math.PI/180), beta: 82*(Math.PI/180)});
-    tween.fromTo(camera, { alpha: 0 * (Math.PI / 180), beta: 180 * (Math.PI / 180) }, { alpha: 90 * (Math.PI / 180), beta: 82 * (Math.PI / 180), duration: 1 });
+    startCamTween.set(camera, {alpha: 0*(Math.PI/180), beta: 180*(Math.PI/180)});
+    startCamTween.fromTo(camera, { alpha: 0 * (Math.PI / 180), beta: 180 * (Math.PI / 180) }, { alpha: 90 * (Math.PI / 180), beta: 82 * (Math.PI / 180), duration: 1 }, 1);
 }
 
 function lookHS(mesh) {
@@ -74,13 +75,39 @@ function TriggerLoopAnimations() {
     }
 
 }
+var rate =0;
+function animateBoden(){
+    let startColor = new BABYLON.Color3.FromHexString("#00000")
+    let endColor = new BABYLON.Color3.FromHexString("#0c83e2")
+
+    if (SceneStarted && rate < 1) {
+        scene.getMaterialByName("light_logo").emissiveColor = new BABYLON.Color3.Lerp(startColor, endColor, rate)
+        rate += 0.05
+
+    }
+}
 
 function BufferStartAnimation(){
+    //scene.getTransformNodeByName("Welcome").rotationQuaternion = null
+    startTween.set(camera, {alpha: 0*(Math.PI/180), beta: 180*(Math.PI/180)});
+    startTween.from(camera, {radius:2.5, duration: 3})
+    startTween.fromTo(camera, { alpha: 0 * (Math.PI / 180), beta: 180 * (Math.PI / 180) }, { alpha: 90 * (Math.PI / 180), beta: 82 * (Math.PI / 180), duration: 2, ease: "power3.inOut" }, ">-2"); //1 second before end of last timeline
+    //startTween.from(scene.getTransformNodeByName("Welcome").rotation, {x:  -180 * (Math.PI / 180), duration: 2, ease: "elastic"},2 );
+
+    let offsetLogos = 3;
+    let rot = new BABYLON.Quaternion(0,1.5,0, 1)
     for(var i = 0; i <= 6; i++){
-        startTween.from(ArrowsHolder[i].scaling, {y:0, duration:0.5}, "<");
-        startTween.from(LogosHolder[i].scaling, {y:0, duration:0.5}, "<");
+        let offString = offsetLogos.toString();
+        ArrowsHolder[i].rotationQuaternion = null // should allow to animate "rotation"
+        startTween.from(ArrowsHolder[i].scaling, {y:0, duration:2, ease: "elastic"}, offsetLogos);
+        startTween.from(ArrowsHolder[i].rotation, {y:  -180 * (Math.PI / 180), duration: 2, ease: "elastic"},"<" );
+        startTween.from(LogosHolder[i].scaling, {y:0, duration:2, ease: "elastic"}, "<0.1")
+        startTween.from(LogosHolder[i].position, {y:  LogosHolder[i].position.y-50, duration: 0.5, ease: "back"},"<" );
+;
+    offsetLogos += 0.1
     }
     //startTween.pause()
+    //tl.to(Eggs_P.rotation, { duration: 0.75, ease: "back", z: 0 }, "-=0.5");
 
 
 }

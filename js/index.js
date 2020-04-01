@@ -180,7 +180,7 @@ var createScene = function () {
     scene.onPointerUp = function () {
 
         if (count == 0) {
-            htmlVideo.play();
+            //htmlVideo.play();
         }
 
         count++;
@@ -192,16 +192,49 @@ var createScene = function () {
 };
 /******* End of the create scene function ******/
 
-var scene = createScene(); //Call the createScene function
-//scene.debugLayer.show();
+var scene;
+var videoLoaded = false;
+var renderLoopEnabled = false;
 
-// Register a render loop to repeatedly render the scene
-engine.runRenderLoop(function () {
-    scene.render();
-    TriggerLoopAnimations()
-    var fpsLabel = document.getElementById("fpsLabel");
-    fpsLabel.innerHTML = engine.getFps().toFixed() + " fps";
-});
+function run() {
+    scene = createScene(); //Call the createScene function
+    //scene.debugLayer.show();
+    
+    // Register a render loop to repeatedly render the scene
+    engine.runRenderLoop(function () {
+        if (renderLoopEnabled) {
+            scene.render();
+            TriggerLoopAnimations()
+            var fpsLabel = document.getElementById("fpsLabel");
+            fpsLabel.innerHTML = engine.getFps().toFixed() + " fps";
+        }
+    });    
+}
+
+function loadVideo() {
+    console.log("Loading video.");
+    var vid = document.getElementById("vid");
+    vid.load();
+    vid.addEventListener("canplaythrough", function() {
+        if (!videoLoaded) {
+            videoLoaded = true;
+            console.log("Can play through.");
+            document.getElementById("vid").play();
+            renderLoopEnabled = true;
+            run();
+        }
+    });
+}
+
+/*window.addEventListener("click", function() {
+    if (!videoLoaded) {
+        videoLoaded = true;
+        loadVideo();
+    }
+});*/
+
+loadVideo();
+
 
 // Watch for browser/canvas resize events
 window.addEventListener("resize", function () {
