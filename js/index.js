@@ -180,7 +180,7 @@ var createScene = function () {
     scene.onPointerUp = function () {
 
         if (count == 0) {
-            //htmlVideo.play();
+            mainScreenVid.video.play();
         }
 
         count++;
