@@ -82,7 +82,7 @@ function CreateCustomMaterials(){
     colMat.alpha = 0
 
     mainScreenMat = new BABYLON.PBRMaterial("textVid", scene);
-    mainScreenVid = new BABYLON.VideoTexture("video", document.getElementsByClassName("scene-vid")[0], scene,false,false, {poster:"./assets/sky2.png"});
+    mainScreenVid = new BABYLON.VideoTexture("video", vids[0], scene,false,false, {poster:"./assets/sky2.png"});
     mainScreenMat.emissiveTexture = mainScreenVid
     mainScreenMat.albedoTexture = mainScreenVid
     mainScreenMat.reflectionTexture = hdrTexture;
@@ -93,7 +93,7 @@ function CreateCustomMaterials(){
     //Applying materials
     
     screenMitte1 = new BABYLON.PBRMaterial("screenMitte1", scene);
-    vidMitte1 = new BABYLON.VideoTexture("vidMitte1", document.getElementsByClassName("scene-vid")[1], scene, {poster: "./assets/ascree.jpg"});
+    vidMitte1 = new BABYLON.VideoTexture("vidMitte1", vids[1], scene, {poster: "./assets/ascree.jpg"});
     vidMitte1.vScale = -1;
     vidMitte1.uScale = 1;
     screenMitte1.emissiveTexture = vidMitte1
@@ -104,7 +104,7 @@ function CreateCustomMaterials(){
     screenMitte1.roughness = 0
 
     screenMitte2 = new BABYLON.PBRMaterial("screenMitte2", scene);
-    vidMitte2 = new BABYLON.VideoTexture("vidMitte2", document.getElementsByClassName("scene-vid")[2], scene, {poster: "./assets/ascree.jpg"});
+    vidMitte2 = new BABYLON.VideoTexture("vidMitte2", vids[2], scene, {poster: "./assets/ascree.jpg"});
     vidMitte2.vScale = -1;
     vidMitte2.uScale = 1;
     screenMitte2.emissiveTexture = vidMitte2
@@ -115,7 +115,7 @@ function CreateCustomMaterials(){
     screenMitte2.roughness = 0
 
     screenMitte3 = new BABYLON.PBRMaterial("screenMitte3", scene);
-    vidMitte3 = new BABYLON.VideoTexture("vidMitte3", document.getElementsByClassName("scene-vid")[3], scene);
+    vidMitte3 = new BABYLON.VideoTexture("vidMitte3", vids[3], scene);
     vidMitte3.vScale = -1;
     vidMitte3.uScale = 1;
     screenMitte3.emissiveTexture = vidMitte3
@@ -126,7 +126,7 @@ function CreateCustomMaterials(){
     screenMitte3.roughness = 0
 
     screenMitte4 = new BABYLON.PBRMaterial("screenMitte4", scene);
-    vidMitte4 = new BABYLON.VideoTexture("vidMitte4", document.getElementsByClassName("scene-vid")[4], scene, {poster: "./assets/ascree.jpg"});
+    vidMitte4 = new BABYLON.VideoTexture("vidMitte4", vids[4], scene, {poster: "./assets/ascree.jpg"});
     vidMitte4.vScale = -1;
     vidMitte4.uScale = 1;
     //vidMitte4.video.muted = "true"
