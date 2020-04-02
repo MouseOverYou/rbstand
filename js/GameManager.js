@@ -50,18 +50,34 @@ function openInfoUI(selec){
 
 }
 
-var click = 0
+//stop & close video
+$('div').click(function(e) {
+    var theClass = this.className;  // "this" is the element clicked
+    //alert( theClass );
+    e.preventDefault();
+    e.stopPropagation();
+    if(theClass == "project-overlay"){
+        console.log("hello overlay, close!")
+        lastSelected.getElementsByClassName("film-values")[0].pause()
+        lastSelected.getElementsByClassName("film-values")[0].load()
+        lastSelected.style.display = "none"
+    }
+});
+
+
+/*
 $('.project-overlay').on('click', function(e){
     e.preventDefault();
     click++;
-    console.log("hello overlay")
+    console.log("hello overlay, close!")
     console.log(click)
     lastSelected.getElementsByClassName("film-values")[0].pause()
     lastSelected.getElementsByClassName("film-values")[0].load()
     lastSelected.style.display = "none"
 
 
-  });
+  });*/
+  
 function SpawnInfobox(mesh, cam) {
     //console.log("hast collider tag?")
     //console.log(BABYLON.Tags.MatchesQuery(mesh, "hs_coll"))
