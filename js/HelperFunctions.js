@@ -1,8 +1,8 @@
 showDebug = true;
 
 $(document).keyup(function (e) {
-    //"d" pressed
-    if (e.keyCode === 68) { handleDebugLayer(); }
+    //"m" pressed
+    if (e.keyCode === 77) { handleDebugLayer(); }
 });
 
 function handleDebugLayer() {

@@ -3,7 +3,6 @@ var SceneStarted = false;
 
 function SetScene() {
     console.log("finish loading")
-
     ChangeMaterialProperties();
     CreateCustomMaterials();
     ChangeMeshesMaterials();
@@ -11,11 +10,15 @@ function SetScene() {
     SpawnHotspots();
     CreateInfoBox();
     SceneStarted = true;
+    createWalker(scene)
     BufferStartAnimation()
 }
 var lastSelected = ""
 function openInfoUI(selec){
-    openInfoContent()
+    if(selec != null){
+        openInfoContent()
+    }
+    
     //handle infobox
     switch(selec){
         case "1":

@@ -14,6 +14,7 @@ var createScene = function () {
     var scene = new BABYLON.Scene(engine);
 
     // Add a camera to the scene and attach it to the canvas
+    
     camera = new BABYLON.ArcRotateCamera("Camera", 90 * (Math.PI / 180), 82 * (Math.PI / 180), 2.8, new BABYLON.Vector3(0, 0.1, 0), scene);
     camera.minZ = 0.1
     camera.panningDistanceLimit = 0;
@@ -25,6 +26,7 @@ var createScene = function () {
     camera.angularSensibilityy = 3000
     camera.wheelPrecision = 100
     camera.attachControl(canvas, true, true, false);
+    
     var assetsManager = new BABYLON.AssetsManager(scene)
     LoadAssets(scene, assetsManager)
 
@@ -51,15 +53,22 @@ var createScene = function () {
     PostEffects(scene);
     
     scene.onPointerDown = function (evt) {
+        //console.log("click")
 
-        var pickInfo = scene.pick(scene.pointerX, scene.pointerY, function (mesh) { return mesh.name !== "ground1" && mesh.isPickable; });
-        if (pickInfo && pickInfo.pickedMesh) {
-            console.log(pickInfo.pickedMesh.name);
-            CurrentSelection = pickInfo.pickedMesh.name.split('hs Collider ')[1];
-            console.log(CurrentSelection)
-            openInfoUI(CurrentSelection)
-            SpawnInfobox(pickInfo.pickedMesh, camera)
-
+        if(scene.activeCamera == walkerCam){
+            console.log("walker camera is on")
+            walkerPointerLock()
+        }
+        else if(scene.activeCamera == camera){
+            console.log("rotate cameraa is on")
+            var pickInfo = scene.pick(scene.pointerX, scene.pointerY, function (mesh) { return mesh.name !== "ground1" && mesh.isPickable; });
+            if (pickInfo && pickInfo.pickedMesh) {
+                console.log(pickInfo.pickedMesh.name);
+                CurrentSelection = pickInfo.pickedMesh.name.split('hs Collider ')[1];
+                console.log(CurrentSelection)
+                openInfoUI(CurrentSelection)
+                SpawnInfobox(pickInfo.pickedMesh, camera)
+            }
         }
     }
     var count = 0;
@@ -68,11 +77,8 @@ var createScene = function () {
         if (count == 0) {
             mainScreenVid.video.play();
         }
-
         count++;
         //debugLabel.innerHTML = "number of pointer ups " + count;
-
-
 }
     return scene;
 };
@@ -89,6 +95,7 @@ function run() {
     // Register a render loop to repeatedly render the scene
     engine.runRenderLoop(function () {
         if (renderLoopEnabled) {
+            console.log("isLocked? " + isLocked)
             scene.render();
             TriggerLoopAnimations()
             var fpsLabel = document.getElementById("fpsLabel");

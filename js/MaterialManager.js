@@ -43,8 +43,8 @@ function ChangeMaterialProperties() {
 
     //icons
     scene.getMaterialByName("iconMatGlass").alpha = 0.75
-    scene.getMaterialByName("iconMatWhite").metallic = 0.3
-    scene.getMaterialByName("iconMatWhite").roughness = 0.1
+    scene.getMaterialByName("iconMatWhite").metallic = 1
+    scene.getMaterialByName("iconMatWhite").roughness = 1
     scene.getMaterialByName("iconMatRed").metallic = 1
     scene.getMaterialByName("iconMatRed").roughness = 1
 
