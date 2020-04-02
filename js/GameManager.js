@@ -15,6 +15,7 @@ function SetScene() {
 }
 var lastSelected = ""
 function openInfoUI(selec){
+    openInfoContent()
     //handle infobox
     switch(selec){
         case "1":
@@ -50,7 +51,7 @@ function openInfoUI(selec){
 
 }
 
-//stop & close video
+//animate closing, stop & close video
 $('div').click(function(e) {
     var theClass = this.className;  // "this" is the element clicked
     //alert( theClass );
@@ -58,9 +59,16 @@ $('div').click(function(e) {
     e.stopPropagation();
     if(theClass == "project-overlay"){
         console.log("hello overlay, close!")
+        closeInfoContent();
+        //handle vidweo playing
         lastSelected.getElementsByClassName("film-values")[0].pause()
         lastSelected.getElementsByClassName("film-values")[0].load()
-        lastSelected.style.display = "none"
+        //animate opacity and disable cointent
+        window.setTimeout(()=>{
+            lastSelected.style.display = "none"
+            $('.bg-overlay').removeClass('open')
+        },250)
+
     }
 });
 

@@ -70,7 +70,7 @@ var createScene = function () {
         }
 
         count++;
-        debugLabel.innerHTML = "number of pointer ups " + count;
+        //debugLabel.innerHTML = "number of pointer ups " + count;
 
 
 }

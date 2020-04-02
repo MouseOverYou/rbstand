@@ -2,6 +2,7 @@ var particleSystem, emitterReveal, swooshParticles, rainSystem, loseParticles
 var tween = gsap.timeline();
 var startTween = gsap.timeline();
 var startCamTween = gsap.timeline();
+var uiTween = gsap.timeline()
 let origin = new BABYLON.Vector3(0, 0.26, 0);
 
 function camAnim() {
@@ -115,3 +116,12 @@ function BufferStartAnimation(){
 
 }
 
+
+function openInfoContent(){
+    $('.bg-overlay').addClass('open');
+    uiTween.fromTo(".project-overlay", {left: -1200, opacity: 0},{left: 0, opacity: 1, duration: 0.5, delay: 0.25})
+}
+
+function closeInfoContent(){
+    uiTween.fromTo(".project-overlay", {left: 0, opacity: 1}, {left: -1200, opacity: 0, duration: 0.5})
+}
