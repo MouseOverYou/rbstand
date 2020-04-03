@@ -38,17 +38,22 @@ $(document).keyup(function (e) {
   }
   //1 PPRESSED -> camera
   else if (e.keyCode == 49) {
-    addWalkerListener()
+    scene.activeCamera = walkerCam
+    canvas.requestPointerLock()
+    document.getElementById("debugLabel").innerHTML = "Current Camera: First Person";
   }
 
   //2 PPRESSED -> walkercam
   else if (e.keyCode == 50) {
-    removeWalkerListener()
+    scene.activeCamera = camera;
+    document.exitPointerLock()
+    document.getElementById("debugLabel").innerHTML = "Current Camera: Rotate Camera";
   }
 
   // SPACE PRESSED -> 
   else if (e.keyCode == 32) {
     console.log("jump")
+    jump(0.035)
   }
 
 });

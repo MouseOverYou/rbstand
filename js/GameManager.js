@@ -2,6 +2,7 @@ var lightAnimController
 var SceneStarted = false;
 
 function SetScene() {
+
     console.log("finish loading")
     ChangeMaterialProperties();
     CreateCustomMaterials();
@@ -12,9 +13,11 @@ function SetScene() {
     SceneStarted = true;
     createWalker(scene)
     BufferStartAnimation()
+
 }
 var lastSelected = ""
 function openInfoUI(selec){
+    walkerSelection = ""
     if(selec != null){
         openInfoContent()
     }
@@ -71,7 +74,11 @@ $('div').click(function(e) {
             lastSelected.style.display = "none"
             $('.bg-overlay').removeClass('open')
         },250)
-
+        if(scene.activeCamera == walkerCam){
+            //lockdownpointer
+            canvas.requestPointerLock()
+            document.getElementById("renderCanvas").focus();
+        }
     }
 });
 

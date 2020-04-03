@@ -1,7 +1,7 @@
 var slot_P, Messe_P
 var hdrTexture
 var SceneMeshes
-var slotMeshTask, startMeshTask, sphere, MesseLoaderTask, HSIconTask, HS_P, LogosLoaderTask
+var slotMeshTask, startMeshTask, sphere, MesseLoaderTask, HSIconTask, HS_P, LogosLoaderTask, MesseCollidersLoaderTask
 
 function LoadAssets(scene, assetsManager) {
 
@@ -44,6 +44,28 @@ function LoadAssets(scene, assetsManager) {
     }
 
     MesseLoaderTask.onError = function (task, message, exception) {
+        console.log(message, exception);
+    }
+
+    MesseCollidersLoaderTask = assetsManager.addMeshTask("", "", "./assets/stand station colliders.glb")
+
+    MesseCollidersLoaderTask.onSuccess = function (task) {
+        
+        task.loadedMeshes[0].position.x = 0
+        task.loadedMeshes[0].position.y = 0
+        task.loadedMeshes[0].position.z = 0
+        task.loadedMeshes[0].parent = Messe_P
+        Messe_P.position.x = 0
+        Messe_P.position.y = 0
+        //console.log(task.loadedMeshes)
+        task.loadedMeshes.forEach(box => {
+            box.visibility = 0.0;
+            box.checkCollisions = true;
+        });
+
+    }
+
+    MesseCollidersLoaderTask.onError = function (task, message, exception) {
         console.log(message, exception);
     }
 

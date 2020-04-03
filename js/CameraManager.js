@@ -1,20 +1,22 @@
-var walkerCam1
+var walkerCam, ground, InfoColliders
+var pointerFake;
+var walkerSelection;
 function createWalker(scene) {
     scene.collisionsEnabled = true;
-    //scene.enablePhysics();
+    scene.enablePhysics();
+    scene.gravity = new BABYLON.Vector3(0, -0.01, 0);
 
     // Parameters : name, position, scene
     walkerCam = new BABYLON.UniversalCamera("walkerCam", new BABYLON.Vector3(0, 0.2, 2.5), scene);
-
+    castRay(scene);
     // Targets the camera to a particular position. In this case the scene origin
     walkerCam.setTarget(BABYLON.Vector3.Zero());
     walkerCam.angularSensibility = 4000
-    //walkerCam.rotation.x = 180 * (Math.PI / 180);
-    //walkerCam.rotation.y = 0 * (Math.PI / 180);
+
 
     // Attach the camera to the canvas
     walkerCam.applyGravity = true;
-    walkerCam.ellipsoid = new BABYLON.Vector3(0.01, 0.1, 0.01);
+    walkerCam.ellipsoid = new BABYLON.Vector3(0.02, 0.1, 0.05);
     walkerCam.checkCollisions = true;
     walkerCam.minZ = 0.05
 
@@ -25,10 +27,83 @@ function createWalker(scene) {
     walkerCam.keysLeft.push(65);
     walkerCam.speed = 0.025
 
+    //scene.activeCamera = walkerCam
+    walkerCam.attachControl(canvas, true);
 
+    pointerFake = BABYLON.MeshBuilder.CreateSphere('pointerFake', { diameter: .00075 }, scene);
+    pointerFake.parent = walkerCam
+    pointerFake.position.z = 0.06;
+
+    //colelct infocolliders
+    InfoColliders = scene.getMeshesByTags("hs_coll")
+    console.log(InfoColliders)
+
+    //Controls...Mouse
+    //We start without being locked.
+    var isLocked = false;
+
+    // On click event, request pointer lock
+    scene.onPointerDown = function (evt) {
+        console.log("isLocked ? " + isLocked)
+        //continue with shooting requests or whatever :P
+        
+        //(left mouse click)
+        //evt === 1 (mouse wheel click (not scrolling))
+        //evt === 2 (right mouse click)
+        //true/false check if we're locked, faster than checking pointerlock on each single click.
+        if (scene.activeCamera == walkerCam) {
+            checkInfoHit();
+            if (!isLocked) {
+                canvas.requestPointerLock = canvas.requestPointerLock || canvas.msRequestPointerLock || canvas.mozRequestPointerLock || canvas.webkitRequestPointerLock;
+                if (canvas.requestPointerLock) {
+                    canvas.requestPointerLock();
+                }
+            }
+        }
+
+        else if (scene.activeCamera == camera) {
+            console.log("rotate cameraa is on")
+            var pickInfo = scene.pick(scene.pointerX, scene.pointerY, function (mesh) { return mesh.name !== "ground1" && mesh.isPickable; });
+            if (pickInfo && pickInfo.pickedMesh) {
+                console.log(pickInfo.pickedMesh.name);
+                CurrentSelection = pickInfo.pickedMesh.name.split('hs Collider ')[1];
+                console.log(CurrentSelection)
+                openInfoUI(CurrentSelection)
+                SpawnInfobox(pickInfo.pickedMesh, camera)
+            }
+        }
+
+
+    };
+
+
+
+    // Event listener when the pointerlock is updated (or removed by pressing ESC for example).
+    var pointerlockchange = function () {
+        var controlEnabled = document.mozPointerLockElement || document.webkitPointerLockElement || document.msPointerLockElement || document.pointerLockElement || null;
+
+        // If the user is already locked
+        if (!controlEnabled) {
+            //camera.detachControl(canvas);
+            isLocked = false;
+        } else {
+            //camera.attachControl(canvas);
+            isLocked = true;
+        }
+    };
+
+    // Attach events to the document
+    document.addEventListener("pointerlockchange", pointerlockchange, false);
+    document.addEventListener("mspointerlockchange", pointerlockchange, false);
+    document.addEventListener("mozpointerlockchange", pointerlockchange, false);
+    document.addEventListener("webkitpointerlockchange", pointerlockchange, false);
+
+    CreateWalkerColliders();
+}
+
+function CreateWalkerColliders() {
     //Bounding box Geometry
-
-    var ground = BABYLON.Mesh.CreateBox("ground", 1, scene);
+    ground = BABYLON.Mesh.CreateBox("ground", 1, scene);
     ground.scaling = new BABYLON.Vector3(10, 0.1, 10);
     ground.position.y = -0.04;
     ground.checkCollisions = true;
@@ -66,65 +141,61 @@ function createWalker(scene) {
     border3.checkCollisions = true;
     border3.isVisible = false;
 
-
 }
-
-function addWalkerListener() {
-
-    scene.activeCamera = walkerCam
-    // Attach events to the document
-    camera.detachControl(canvas);
-    walkerCam.attachControl(canvas, true);
-    document.addEventListener("pointerlockchange", pointerlockchange, false);
-    document.addEventListener("mspointerlockchange", pointerlockchange, false);
-    document.addEventListener("mozpointerlockchange", pointerlockchange, false);
-    document.addEventListener("webkitpointerlockchange", pointerlockchange, false);
-
-}
-
-function removeWalkerListener() {
-    // Detach events to the document
-    document.removeEventListener("pointerlockchange", pointerlockchange, false);
-    document.removeEventListener("mspointerlockchange", pointerlockchange, false);
-    document.removeEventListener("mozpointerlockchange", pointerlockchange, false);
-    document.removeEventListener("webkitpointerlockchange", pointerlockchange, false);
-    walkerCam.detachControl(canvas);
-    camera.attachControl(canvas, true, true, false);
-    scene.activeCamera = camera
-
-
-}
-
 //Jump
 function jump(rate) {
     walkerCam.cameraDirection.y = rate;
 }
 
-//We start without being locked.
-var isLocked = false;
-//this is call every pointerdown
-function walkerPointerLock() {
-    canvas.requestPointerLock = canvas.requestPointerLock || canvas.msRequestPointerLock || canvas.mozRequestPointerLock || canvas.webkitRequestPointerLock;
-    if (canvas.requestPointerLock) {
-        canvas.requestPointerLock();
+function checkInfoHit(){
+    if(walkerSelection != ""){
+
+        var walkerSelectionNum = walkerSelection.split('hs Collider ')[1];
+        openInfoUI(walkerSelectionNum)
+        document.exitPointerLock()
     }
-
-    if (!isLocked) {
-
+    else{
+        console.log("nothing was hit")
     }
 }
 
-// Event listener when the pointerlock is updated (or removed by pressing ESC for example).
-var pointerlockchange = function () {
-    var controlEnabled = document.mozPointerLockElement || document.webkitPointerLockElement || document.msPointerLockElement || document.pointerLockElement || null;
+function castRay(scene) {
 
-    // If the user is already locked
-    if (!controlEnabled) {
-        //camera.detachControl(canvas);
-        isLocked = false;
-    } else {
-        //camera.attachControl(canvas);
-        isLocked = true;
-    }
-};
+    var ray = new BABYLON.Ray();
+    var rayHelper = new BABYLON.RayHelper(ray);
 
+    var localMeshDirection = new BABYLON.Vector3(0, 0, 1);
+    var localMeshOrigin = new BABYLON.Vector3(0, 0, 0);
+    var length = 2;
+
+    rayHelper.attachToMesh(walkerCam, localMeshDirection, localMeshOrigin, length);
+
+    //rayHelper.show(scene, new BABYLON.Color3(1,0,0));
+
+    var pointerMesh = BABYLON.MeshBuilder.CreateSphere('', { diameter: .03 }, scene);
+    pointerMat = new BABYLON.PBRMaterial("pointerMat", scene);
+    pointerMat.unlit = true
+    pointerMat.albedoColor = new BABYLON.Color3(0, 0, 0)
+    pointerMesh.material = pointerMat
+    pointerMesh.setEnabled(false);
+
+
+    scene.registerBeforeRender(function () {
+
+        var hitInfo = ray.intersectsMeshes(InfoColliders, true);
+
+        if (hitInfo.length) {
+            console.log(hitInfo[0].pickedMesh.name);
+            walkerSelection = hitInfo[0].pickedMesh.name;
+            pointerMesh.setEnabled(true);
+            pointerFake.setEnabled(false)
+            pointerMesh.position.copyFrom(hitInfo[0].pickedPoint);
+            pointerMat.albedoColor = new BABYLON.Color3(0, 0, 0)
+
+        } else {
+            walkerSelection = "";
+            pointerMesh.setEnabled(false);
+            pointerFake.setEnabled(true)
+        }
+    });
+}
