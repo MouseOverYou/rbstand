@@ -77,7 +77,7 @@ function AddGlow(){
         var gl = new BABYLON.GlowLayer("glow", scene) //glow layer 
         gl.intensity = 0.7;
         scene.meshes.forEach(elem => {
-            if(elem.name.startsWith("Screen_")){
+            if(elem.name.startsWith("Screen_") || elem.name =="Video_Screens"){
                 gl.addExcludedMesh(elem)
             }
         });

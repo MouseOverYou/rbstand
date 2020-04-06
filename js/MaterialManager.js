@@ -91,7 +91,7 @@ function CreateCustomMaterials(){
     mainScreenMat.backFaceCulling = false;
     mainScreenMat.emissiveColor = new BABYLON.Color3.FromHexString("#ffffff")
     //Applying materials
-    
+    /*
     screenMitte1 = new BABYLON.PBRMaterial("screenMitte1", scene);
     vidMitte1 = new BABYLON.VideoTexture("vidMitte1", vids[1], scene, {poster: "./assets/ascree.jpg"});
     vidMitte1.vScale = -1;
@@ -138,14 +138,21 @@ function CreateCustomMaterials(){
     screenMitte4.metallic = 0.75
     screenMitte4.roughness = 0
 
+    */
     
 }
 function ChangeMeshesMaterials(){
-    scene.getMeshByName("Screen_Main_1").material = mainScreenMat;
-    scene.getMeshByName("Screen_Main_2").material = mainScreenMat;
-    
-    scene.getMeshByName("Screen_mitte_1").material = screenMitte1;
-    scene.getMeshByName("Screen_mitte_2").material = screenMitte2;
-    scene.getMeshByName("Screen_mitte_3").material = screenMitte3;
-    scene.getMeshByName("Screen_mitte_4").material = screenMitte4;
+    //scene.getMeshByName("Screen_Main_1").material = mainScreenMat;
+    //scene.getMeshByName("Screen_Main_2").material = mainScreenMat;
+    //scene.getMeshByName("Screen_mitte_1").material = screenMitte1;
+    //scene.getMeshByName("Screen_mitte_2").material = screenMitte2;
+    //scene.getMeshByName("Screen_mitte_3").material = screenMitte3;
+    //scene.getMeshByName("Screen_mitte_4").material = screenMitte4;
+    scene.getMeshByName("Screen_Main_1").visibility = 0;
+    scene.getMeshByName("Screen_Main_2").visibility = 0;
+    scene.getMeshByName("Screen_mitte_1").visibility = 0;
+    scene.getMeshByName("Screen_mitte_2").visibility = 0;
+    scene.getMeshByName("Screen_mitte_3").visibility = 0;
+    scene.getMeshByName("Screen_mitte_4").visibility = 0;
+    scene.getMeshByName("Video_Screens").material = mainScreenMat
 } 

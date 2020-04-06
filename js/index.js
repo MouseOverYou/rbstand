@@ -120,7 +120,7 @@ function loadVideo() {
     }
 });*/
 
-loadLoop();
+loadVideo();
 
 
 // Watch for browser/canvas resize events
