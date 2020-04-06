@@ -112,6 +112,7 @@ function SpawnHotspots(){
             hsColl.material = colMat
             hsColl.parent = clone;
             hsColl.isPickable = true;
+            //AllowMouseOverMesh(hsColl)
             BABYLON.Tags.EnableFor(hsColl)
             BABYLON.Tags.AddTagsTo(hsColl, "hs_coll");
             hsHolder.push(clone);
@@ -128,6 +129,7 @@ function SpawnHotspots(){
             arrowColl.parent = elem;
             arrowColl.position.y =20
             arrowColl.isPickable = true;
+            AllowMouseOverMesh(arrowColl)
             BABYLON.Tags.EnableFor(arrowColl)
             BABYLON.Tags.AddTagsTo(arrowColl, "arrow_coll");
             
@@ -137,6 +139,20 @@ function SpawnHotspots(){
         }
     });
 
+}
+
+function AllowMouseOverMesh(mesh){
+    mesh.actionManager = new BABYLON.ActionManager(scene);
+	
+	//ON MOUSE ENTER
+	mesh.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPointerOverTrigger, function(ev){	
+		//mesh.material.emissiveColor = BABYLON.Color3.Blue();
+	}));
+	
+	//ON MOUSE EXIT
+	mesh.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPointerOutTrigger, function(ev){
+		//mesh.material.emissiveColor = BABYLON.Color3.Black();
+	}));
 }
 
 function FeedWithLogo(name, parent){
