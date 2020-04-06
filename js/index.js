@@ -12,22 +12,13 @@ var createScene = function () {
 
     // Create the scene space
     var scene = new BABYLON.Scene(engine);
+    scene.collisionsEnabled = true;
+    scene.enablePhysics();
+    scene.gravity = new BABYLON.Vector3(0, -0.01, 0);
 
-    // Add a camera to the scene and attach it to the canvas
-    camera = new BABYLON.ArcRotateCamera("Camera", 90 * (Math.PI / 180), 82 * (Math.PI / 180), 2.8, new BABYLON.Vector3(0, 0.1, 0), scene);
-    camera.minZ = 0.1
-    camera.panningDistanceLimit = 0;
-    camera.pinchToPanMaxDistance = 0;
-    camera.panningSensibility = 0
-    camera.lowerRadiusLimit = 0
-    camera.upperRadiusLimit = 4
-    camera.angularSensibilityX = 3000
-    camera.angularSensibilityy = 3000
-    camera.wheelPrecision = 100
-    camera.attachControl(canvas, true, true, false);
-    
     var assetsManager = new BABYLON.AssetsManager(scene)
     LoadAssets(scene, assetsManager)
+    SetupCameras(scene)    
 
     lightLinks = new BABYLON.DirectionalLight("lightLinks", new BABYLON.Vector3(-60, -41, -90), scene);
     lightLinks.position = new BABYLON.Vector3(1, 1, 0);

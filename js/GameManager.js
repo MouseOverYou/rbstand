@@ -9,9 +9,9 @@ function SetScene() {
     ChangeMeshesMaterials();
     AddGlow();
     SpawnHotspots();
-    CreateInfoBox();
+    CreateRaycast(scene);//after colliders are added to hotspots
+    //CreateInfoBox();
     SceneStarted = true;
-    createWalker(scene)
     BufferStartAnimation()
 
 }
@@ -58,14 +58,15 @@ function openInfoUI(selec){
 }
 
 //animate closing, stop & close video
-$('div').click(function(e) {
+$('div, .x-icon').click(function(e) {
     var theClass = this.className;  // "this" is the element clicked
     //alert( theClass );
     e.preventDefault();
     e.stopPropagation();
-    if(theClass == "project-overlay"){
+    if(theClass == "project-overlay" || theClass == "x-icon open"){
         console.log("hello overlay, close!")
         closeInfoContent();
+        $('.x-icon').removeClass('open');
         //handle vidweo playing
         lastSelected.getElementsByClassName("film-values")[0].pause()
         lastSelected.getElementsByClassName("film-values")[0].load()
@@ -95,7 +96,7 @@ $('.project-overlay').on('click', function(e){
 
 
   });*/
-  
+
 function SpawnInfobox(mesh, cam) {
     //console.log("hast collider tag?")
     //console.log(BABYLON.Tags.MatchesQuery(mesh, "hs_coll"))
@@ -112,12 +113,12 @@ function SpawnInfobox(mesh, cam) {
         }
 
         LookAt_Y(pos, cam);
-        lookHS(mesh);
+        TravelRotateCamTo(mesh);
         show_backbutton();
  
         //IBox_P.position = new BABYLON.Vector3(pos.x , pos.y + 0.2, pos.z)
         //IS object on the left or right?
-        /*
+              
 
         var p  = WorldPosToScreenPos(pos, cam);
         if (p.x > 0.5) {
@@ -128,7 +129,7 @@ function SpawnInfobox(mesh, cam) {
             //console.log("left")
             IBox_P.position = new BABYLON.Vector3(pos.x - 0.25, pos.y + 0.1, pos.z)
         }
-        */
+            
     }
 
     if(BABYLON.Tags.MatchesQuery(mesh, "vid_coll")){
@@ -137,7 +138,6 @@ function SpawnInfobox(mesh, cam) {
 
 }
 
-//HELPERS
 function LookAt_Y(pos, cam) {
     lookValue = pos.subtract(cam.position);
     IBox_P.rotation.y = -Math.atan2(lookValue.z, lookValue.x) - Math.PI / 2;

@@ -36,18 +36,22 @@ $(document).keyup(function (e) {
     //startTween.restart()
     startTween.restart();
   }
-  //1 PPRESSED -> camera
+  //1 PPRESSED -> walkercam
   else if (e.keyCode == 49) {
     scene.activeCamera = walkerCam
     canvas.requestPointerLock()
     document.getElementById("debugLabel").innerHTML = "Current Camera: First Person";
+    RevealInfopoints(true)
   }
 
-  //2 PPRESSED -> walkercam
+  //2 PPRESSED -> rotate camera
   else if (e.keyCode == 50) {
     scene.activeCamera = camera;
     document.exitPointerLock()
     document.getElementById("debugLabel").innerHTML = "Current Camera: Rotate Camera";
+    TravelRotateCamBack()
+    RevealInfopoints(false)
+
   }
 
   // SPACE PRESSED -> 
@@ -67,7 +71,8 @@ function show_backbutton() {
 $('.back-zoom').on('click', function (e) {
   e.preventDefault();
   hide_backbutton();
-  zoomCamOut();
+  TravelRotateCamBack();
+  RevealInfopoints(false);
 });
 
 function hide_backbutton() {

@@ -86,7 +86,8 @@ function AddGlow(){
 
 
 function SpawnHotspots(){
-    let counter = 0;
+    let hsCounter = 0;
+    let arrowCounter = 0;
     let Hs_Clones = []
 
     //TO DO: ALL LOOPS IN ONE
@@ -97,7 +98,7 @@ function SpawnHotspots(){
         if(elem.name.startsWith("ref_Hotspot_")){
             //elem.setEnabled(false)
             elem.visibility = 0;
-            counter ++;
+            hsCounter ++;
             //create icon
             var clone = HSIconTask.loadedMeshes[0].instantiateHierarchy(elem, undefined, (source, clone) => {
                 //clone.position = elem.position;
@@ -105,28 +106,31 @@ function SpawnHotspots(){
             })
             //clone.position = elem.position;
             clone.rotation = BABYLON.Quaternion.FromEulerAngles(0, Math.random() * 2 * Math.PI, 0);
-            clone.name = "HS Clone " + counter
+            clone.name = "HS Clone " + hsCounter
 
-            hsColl = new BABYLON.MeshBuilder.CreateBox("hs Collider " + counter, { height: 40, width: 40, depth: 10 }, scene)
+            hsColl = new BABYLON.MeshBuilder.CreateBox("hs Collider " + hsCounter, { height: 40, width: 40, depth: 10 }, scene)
             hsColl.material = colMat
             hsColl.parent = clone;
             hsColl.isPickable = true;
+            BABYLON.Tags.EnableFor(hsColl)
             BABYLON.Tags.AddTagsTo(hsColl, "hs_coll");
             hsHolder.push(clone);
         }
         else if(elem.name.startsWith("Arrow_")){
+            arrowCounter++;
             //create Colliders
             elem.visibility = false;
             ArrowsHolder.push(elem.parent)
             FeedWithLogo(elem.name.split("_")[1], elem)
-            /*
-
-            arrowColl = new BABYLON.MeshBuilder.CreateBox("Arrow Collider " + counter, { height: 40, width: 40, depth: 10 }, scene)
+            
+            arrowColl = new BABYLON.MeshBuilder.CreateBox("Arrow Collider " + arrowCounter, { height: 80, width: 80, depth: 10 }, scene)
             arrowColl.material = colMat
             arrowColl.parent = elem;
+            arrowColl.position.y =20
             arrowColl.isPickable = true;
-            BABYLON.Tags.AddTagsTo(arrowColl, "hs_coll");
-            */
+            BABYLON.Tags.EnableFor(arrowColl)
+            BABYLON.Tags.AddTagsTo(arrowColl, "arrow_coll");
+            
         }
         else if(elem.name.startsWith("ref_Anchor_")){
             elem.visibility = false;

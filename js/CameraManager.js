@@ -1,50 +1,19 @@
-var walkerCam, ground, InfoColliders
-var pointerFake;
+var walkerCam, ground, InfoColliders, arrowColliders, pointerFake
 var walkerSelection;
-function createWalker(scene) {
-    scene.collisionsEnabled = true;
-    scene.enablePhysics();
-    scene.gravity = new BABYLON.Vector3(0, -0.01, 0);
+function SetupCameras(scene) {
+    //collect infocolliders
 
-    // Parameters : name, position, scene
-    walkerCam = new BABYLON.UniversalCamera("walkerCam", new BABYLON.Vector3(0, 0.2, 2.5), scene);
-    castRay(scene);
-    // Targets the camera to a particular position. In this case the scene origin
-    walkerCam.setTarget(BABYLON.Vector3.Zero());
-    walkerCam.angularSensibility = 4000
+    CreateRotateCam(scene)
+    CreateWalkerCam(scene)
 
-
-    // Attach the camera to the canvas
-    walkerCam.applyGravity = true;
-    walkerCam.ellipsoid = new BABYLON.Vector3(0.02, 0.1, 0.05);
-    walkerCam.checkCollisions = true;
-    walkerCam.minZ = 0.05
-
-    //Controls  WASD
-    walkerCam.keysUp.push(87);
-    walkerCam.keysDown.push(83);
-    walkerCam.keysRight.push(68);
-    walkerCam.keysLeft.push(65);
-    walkerCam.speed = 0.025
-
-    //scene.activeCamera = walkerCam
-    walkerCam.attachControl(canvas, true);
-
-    pointerFake = BABYLON.MeshBuilder.CreateSphere('pointerFake', { diameter: .00075 }, scene);
-    pointerFake.parent = walkerCam
-    pointerFake.position.z = 0.06;
-
-    //colelct infocolliders
-    InfoColliders = scene.getMeshesByTags("hs_coll")
-    console.log(InfoColliders)
 
     //Controls...Mouse
     //We start without being locked.
-    var isLocked = false;
+    var isLocked = true;
 
     // On click event, request pointer lock
     scene.onPointerDown = function (evt) {
-        console.log("isLocked ? " + isLocked)
+        //console.log("isLocked ? " + isLocked)
         //continue with shooting requests or whatever :P
         
         //(left mouse click)
@@ -52,6 +21,7 @@ function createWalker(scene) {
         //evt === 2 (right mouse click)
         //true/false check if we're locked, faster than checking pointerlock on each single click.
         if (scene.activeCamera == walkerCam) {
+            console.log("click while walker cam")
             checkInfoHit();
             if (!isLocked) {
                 canvas.requestPointerLock = canvas.requestPointerLock || canvas.msRequestPointerLock || canvas.mozRequestPointerLock || canvas.webkitRequestPointerLock;
@@ -62,14 +32,21 @@ function createWalker(scene) {
         }
 
         else if (scene.activeCamera == camera) {
-            console.log("rotate cameraa is on")
-            var pickInfo = scene.pick(scene.pointerX, scene.pointerY, function (mesh) { return mesh.name !== "ground1" && mesh.isPickable; });
-            if (pickInfo && pickInfo.pickedMesh) {
+            var pickInfo = scene.pick(scene.pointerX, scene.pointerY, function (mesh) { return ( BABYLON.Tags.MatchesQuery(mesh, "arrow_coll") || BABYLON.Tags.MatchesQuery(mesh, "hs_coll") ) && mesh.isPickable; });
+            if (pickInfo && pickInfo.pickedMesh && BABYLON.Tags.MatchesQuery(pickInfo.pickedMesh, "arrow_coll")) {
+                console.log(pickInfo.pickedMesh.name);
+                CurrentSelection = pickInfo.pickedMesh.name.split('Arrow Collider ')[1];
+                console.log(CurrentSelection)
+                TravelRotateCamTo(CurrentSelection);//send corresponding infobox to travel to
+                show_backbutton();
+                RevealInfopoints(true)
+                //after time show all info buttons
+            }
+            else if (pickInfo && pickInfo.pickedMesh && BABYLON.Tags.MatchesQuery(pickInfo.pickedMesh, "hs_coll")){
                 console.log(pickInfo.pickedMesh.name);
                 CurrentSelection = pickInfo.pickedMesh.name.split('hs Collider ')[1];
-                console.log(CurrentSelection)
                 openInfoUI(CurrentSelection)
-                SpawnInfobox(pickInfo.pickedMesh, camera)
+                $('.x-icon').addClass('open');
             }
         }
 
@@ -142,6 +119,48 @@ function CreateWalkerColliders() {
     border3.isVisible = false;
 
 }
+
+function CreateWalkerCam(scene){ 
+        // Parameters : name, position, scene
+        walkerCam = new BABYLON.UniversalCamera("walkerCam", new BABYLON.Vector3(0, 0.2, 2.5), scene);
+
+        // Targets the camera to a particular position. In this case the scene origin
+        walkerCam.setTarget(BABYLON.Vector3.Zero());
+        walkerCam.angularSensibility = 4000
+    
+        // Attach the camera to the canvas
+        walkerCam.applyGravity = true;
+        walkerCam.ellipsoid = new BABYLON.Vector3(0.02, 0.1, 0.05);
+        walkerCam.checkCollisions = true;
+        walkerCam.minZ = 0.05
+    
+        //Controls  WASD
+        walkerCam.keysUp.push(87);
+        walkerCam.keysDown.push(83);
+        walkerCam.keysRight.push(68);
+        walkerCam.keysLeft.push(65);
+        walkerCam.speed = 0.025
+    
+        //scene.activeCamera = walkerCam
+        walkerCam.attachControl(canvas, true);
+
+}
+
+function CreateRotateCam(scene){
+    // Add a camera to the scene and attach it to the canvas
+    camera = new BABYLON.ArcRotateCamera("Camera", 90 * (Math.PI / 180), 82 * (Math.PI / 180), 2.8, new BABYLON.Vector3(0, 0.1, 0), scene);
+    camera.minZ = 0.1
+    camera.panningDistanceLimit = 0;
+    camera.pinchToPanMaxDistance = 0;
+    camera.panningSensibility = 0
+    camera.lowerRadiusLimit = 0
+    camera.upperRadiusLimit = 4
+    camera.angularSensibilityX = 3000
+    camera.angularSensibilityy = 3000
+    camera.wheelPrecision = 100
+    camera.attachControl(canvas, true, true, false);
+
+}
 //Jump
 function jump(rate) {
     walkerCam.cameraDirection.y = rate;
@@ -152,6 +171,7 @@ function checkInfoHit(){
 
         var walkerSelectionNum = walkerSelection.split('hs Collider ')[1];
         openInfoUI(walkerSelectionNum)
+        $('.x-icon').addClass('open');
         document.exitPointerLock()
     }
     else{
@@ -159,7 +179,13 @@ function checkInfoHit(){
     }
 }
 
-function castRay(scene) {
+function CreateRaycast(scene) {
+    InfoColliders = scene.getMeshesByTags("hs_coll")
+    console.log(InfoColliders)
+
+    pointerFake = BABYLON.MeshBuilder.CreateSphere('pointerFake', { diameter: .00075 }, scene);
+    pointerFake.parent = walkerCam
+    pointerFake.position.z = 0.06;
 
     var ray = new BABYLON.Ray();
     var rayHelper = new BABYLON.RayHelper(ray);
@@ -194,6 +220,7 @@ function castRay(scene) {
 
         } else {
             walkerSelection = "";
+            //console.log("hitting nothing");
             pointerMesh.setEnabled(false);
             pointerFake.setEnabled(true)
         }

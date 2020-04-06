@@ -1,21 +1,17 @@
-var particleSystem, emitterReveal, swooshParticles, rainSystem, loseParticles
 var tween = gsap.timeline();
 var startTween = gsap.timeline();
 var startCamTween = gsap.timeline();
+var infoReveal = gsap.timeline();
 var uiTween = gsap.timeline()
 let origin = new BABYLON.Vector3(0, 0.26, 0);
 
-function camAnim() {
+//rotate camera animations
+function TravelRotateCamTo(CurrentSelection) {
 
-    //tween.fromTo(camera, {beta: 180*(Math.PI/180)}, {beta: 82*(Math.PI/180), duration: 1});
-    startCamTween.set(camera, {alpha: 0*(Math.PI/180), beta: 180*(Math.PI/180)});
-    startCamTween.fromTo(camera, { alpha: 0 * (Math.PI / 180), beta: 180 * (Math.PI / 180) }, { alpha: 90 * (Math.PI / 180), beta: 82 * (Math.PI / 180), duration: 1 }, 1);
-}
-
-function lookHS(mesh) {
-
+    let selec = parseInt(CurrentSelection) - 1
+    let meshTo = InfoColliders[selec];
     let v0 = new BABYLON.Vector3(0, 0.1, 0);
-    let v1 = mesh.getAbsolutePosition().subtract(v0);
+    let v1 = meshTo.getAbsolutePosition().subtract(v0);
 
     v1.normalize();
     let angleAlpha = Math.atan2(v1.z, v1.x)
@@ -57,16 +53,14 @@ function lookHS(mesh) {
             break;
             
     }
-
-    //camera.setTarget(origin)
-    //tween.to(camera, { alpha: angleAlpha + Math.PI, beta: angleBeta * (Math.PI / 180),  radius: 0.1, duration: 1} )
 }
 
-function zoomCamOut(){
+function TravelRotateCamBack(){
     camera.setTarget(origin)
     tween.to(camera, { alpha: 90 * (Math.PI / 180), beta: 82 * (Math.PI / 180),  radius: 2.8, duration: 1} )
 }
 
+//custom animations
 function TriggerLoopAnimations() {
 
     if (SceneStarted) {
@@ -89,6 +83,7 @@ function animateBoden(){
 }
 
 function BufferStartAnimation(){
+    RevealInfopoints(false);
     scene.getTransformNodeByName("logo holder").setEnabled(false)
     scene.getTransformNodeByName("Welcome").rotationQuaternion = null
     scene.getTransformNodeByName("Welcome").scaling = new BABYLON.Vector3(0,0,0)
@@ -124,4 +119,24 @@ function openInfoContent(){
 
 function closeInfoContent(){
     uiTween.fromTo(".project-overlay", {left: 0, opacity: 1}, {left: -1200, opacity: 0, duration: 0.5})
+
+}
+
+function RevealInfopoints(state){
+    //if true show, else hide
+    //To do: start animating by index of selected, only animate in when first time
+    if(state){
+        window.setTimeout(()=>{
+            hsHolder.forEach(hs => {
+                infoReveal.fromTo(hs.scaling, {x:0, y:0, z: 0}, {x: 1, y:1, z:1, duration:0.3, ease:"back.inOut(4)"},">-0.2");
+            })
+        }, 500)
+    }
+
+    else{
+        hsHolder.forEach(hs => {
+            infoReveal.fromTo(hs.scaling, {x: 1, y:1, z: 1}, {x: 0, y:0, z:0, duration:0.3, ease:"back.inOut(4)"},">-0.25");
+        })
+    
+    }
 }

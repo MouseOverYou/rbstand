@@ -122,6 +122,28 @@ right: -65%;
     cursor: default;
 }
 
+/* X ICON */
+.x-icon {
+  position: absolute;
+  z-index: -1;
+  top: 15px;
+  right: 20px;
+  font-size: 36px;
+  line-height: 1;
+  font-weight: 400;
+  color: #fff;
+  opacity: 0;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-transition: all 200ms;
+  transition: all 200ms;
+}
+
+.x-icon.open {
+  position: fixed;
+  z-index: 3;
+  opacity: 1;
+}
 /*VIDEO controller CSS*/
 .video-overlay {
     position: fixed;
@@ -158,7 +180,7 @@ right: -65%;
   }
 
   
-  .video-overlay-close:hover, .back-zoom:hover{
+  .video-overlay-close:hover, .x-icon:hover, .back-zoom:hover{
     color: #fa183d;
   }
   
