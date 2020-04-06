@@ -68,8 +68,9 @@ $('div, .x-icon').click(function(e) {
         closeInfoContent();
         $('.x-icon').removeClass('open');
         //handle vidweo playing
-        lastSelected.getElementsByClassName("film-values")[0].pause()
-        lastSelected.getElementsByClassName("film-values")[0].load()
+        console.log(lastSelected.querySelector("iframe"))
+        lastSelected.querySelector("iframe").src = lastSelected.querySelector("iframe").src
+        //lastSelected.querySelector("iframe").load()
         //animate opacity and disable cointent
         window.setTimeout(()=>{
             lastSelected.style.display = "none"
