@@ -5,6 +5,10 @@ var infoReveal = gsap.timeline();
 var uiTween = gsap.timeline()
 let origin = new BABYLON.Vector3(0, 0.26, 0);
 
+let pulseAnimRate = 1;
+let pulseAnimVector = new BABYLON.Vector3(1,1,1);
+
+
 //rotate camera animations
 function TravelRotateCamTo(CurrentSelection) {
 
@@ -66,10 +70,17 @@ function TriggerLoopAnimations() {
     if (SceneStarted) {
         hsHolder.forEach(elem => {
             elem.rotation.y += 0.005;
+            
         });
         arrowGlowTex.uOffset += 0.01;
         if(arrowGlowTex.uOffset > 0.5){
             arrowGlowTex.uOffset = -0.5
+        }
+        pulseAnimRate +=0.01
+        //scene.getMaterialByName("iconMatGlass").alpha = -pulseAnimRate + 1.4
+        pulseAnimVector = new BABYLON.Vector3(pulseAnimRate, pulseAnimRate, pulseAnimRate);
+        if(pulseAnimRate>1){
+            pulseAnimRate=0.65;
         }
     }
 
@@ -155,3 +166,4 @@ function RevealInfopoints(state, selec){
     
     }
 }
+

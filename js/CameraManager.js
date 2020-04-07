@@ -26,17 +26,17 @@ function SetupCameras(scene) {
         }
 
         else if (scene.activeCamera == camera) {
-            var pickInfo = scene.pick(scene.pointerX, scene.pointerY, function (mesh) { return ( BABYLON.Tags.MatchesQuery(mesh, "arrow_coll") || BABYLON.Tags.MatchesQuery(mesh, "hs_coll") ) && mesh.isPickable; });
+            var pickInfo = scene.pick(scene.pointerX, scene.pointerY, function (mesh) { return (BABYLON.Tags.MatchesQuery(mesh, "arrow_coll") || BABYLON.Tags.MatchesQuery(mesh, "hs_coll")) && mesh.isPickable; });
             if (pickInfo && pickInfo.pickedMesh && BABYLON.Tags.MatchesQuery(pickInfo.pickedMesh, "arrow_coll")) {
                 console.log(pickInfo.pickedMesh.name);
                 CurrentSelection = pickInfo.pickedMesh.name.split('Arrow Collider ')[1];
                 console.log(CurrentSelection)
                 TravelRotateCamTo(CurrentSelection);//send corresponding infobox to travel to
                 show_backbutton();
-                RevealInfopoints(true, parseInt(CurrentSelection)-1)
+                RevealInfopoints(true, parseInt(CurrentSelection) - 1)
                 //after time show all info buttons
             }
-            else if (pickInfo && pickInfo.pickedMesh && BABYLON.Tags.MatchesQuery(pickInfo.pickedMesh, "hs_coll")){
+            else if (pickInfo && pickInfo.pickedMesh && BABYLON.Tags.MatchesQuery(pickInfo.pickedMesh, "hs_coll")) {
                 console.log(pickInfo.pickedMesh.name);
                 CurrentSelection = pickInfo.pickedMesh.name.split('hs Collider ')[1];
                 openInfoUI(CurrentSelection)
@@ -114,33 +114,33 @@ function CreateWalkerColliders() {
 
 }
 
-function CreateWalkerCam(scene){ 
-        // Parameters : name, position, scene
-        walkerCam = new BABYLON.UniversalCamera("walkerCam", new BABYLON.Vector3(0, 0.2, 2.5), scene);
+function CreateWalkerCam(scene) {
+    // Parameters : name, position, scene
+    walkerCam = new BABYLON.UniversalCamera("walkerCam", new BABYLON.Vector3(0, 0.2, 2.5), scene);
 
-        // Targets the camera to a particular position. In this case the scene origin
-        walkerCam.setTarget(BABYLON.Vector3.Zero());
-        walkerCam.angularSensibility = 4000
-    
-        // Attach the camera to the canvas
-        walkerCam.applyGravity = true;
-        walkerCam.ellipsoid = new BABYLON.Vector3(0.02, 0.1, 0.05);
-        walkerCam.checkCollisions = true;
-        walkerCam.minZ = 0.05
-    
-        //Controls  WASD
-        walkerCam.keysUp.push(87);
-        walkerCam.keysDown.push(83);
-        walkerCam.keysRight.push(68);
-        walkerCam.keysLeft.push(65);
-        walkerCam.speed = 0.025
-    
-        //scene.activeCamera = walkerCam
-        walkerCam.attachControl(canvas, true);
+    // Targets the camera to a particular position. In this case the scene origin
+    walkerCam.setTarget(BABYLON.Vector3.Zero());
+    walkerCam.angularSensibility = 4000
+
+    // Attach the camera to the canvas
+    walkerCam.applyGravity = true;
+    walkerCam.ellipsoid = new BABYLON.Vector3(0.02, 0.1, 0.05);
+    walkerCam.checkCollisions = true;
+    walkerCam.minZ = 0.05
+
+    //Controls  WASD
+    walkerCam.keysUp.push(87);
+    walkerCam.keysDown.push(83);
+    walkerCam.keysRight.push(68);
+    walkerCam.keysLeft.push(65);
+    walkerCam.speed = 0.025
+
+    //scene.activeCamera = walkerCam
+    walkerCam.attachControl(canvas, true);
 
 }
 
-function CreateRotateCam(scene){
+function CreateRotateCam(scene) {
     // Add a camera to the scene and attach it to the canvas
     camera = new BABYLON.ArcRotateCamera("Camera", 90 * (Math.PI / 180), 82 * (Math.PI / 180), 2.8, new BABYLON.Vector3(0, 0.1, 0), scene);
     camera.minZ = 0.1
@@ -160,15 +160,15 @@ function jump(rate) {
     walkerCam.cameraDirection.y = rate;
 }
 
-function checkInfoHit(){
-    if(walkerSelection != ""){
+function checkInfoHit() {
+    if (walkerSelection != "") {
 
         var walkerSelectionNum = walkerSelection.split('hs Collider ')[1];
         openInfoUI(walkerSelectionNum)
         $('.x-icon').addClass('open');
         document.exitPointerLock()
     }
-    else{
+    else {
         console.log("nothing was hit")
     }
 }
@@ -195,50 +195,62 @@ function CreateRaycast(scene) {
     pointerMesh = BABYLON.MeshBuilder.CreateSphere('', { diameter: .03 }, scene);
     pointerMat = new BABYLON.PBRMaterial("pointerMat", scene);
     pointerMat.unlit = true
-    pointerMat.albedoColor = new BABYLON.Color3(0, 0, 0)
+    pointerMat.albedoColor = new BABYLON.Color3.FromHexString("#ea1e1e")
+    pointerMat.emissiveColor = new BABYLON.Color3.FromHexString("#ea1e1e")
     pointerMesh.material = pointerMat
+    pointerFake.material = pointerMat
     pointerMesh.setEnabled(false);
 
 
     scene.registerBeforeRender(function () {
 
         var hitInfo = ray.intersectsMeshes(InfoColliders, true);
+        if (scene.activeCamera == walkerCam) {
+            if (hitInfo.length) {
+                console.log(hitInfo[0].pickedMesh.name);
+                walkerSelection = hitInfo[0].pickedMesh.name;
+                hitInfo[0].pickedMesh.parent.getChildMeshes()[2].scaling = pulseAnimVector
+                //pointerMesh.setEnabled(true);
+                //pointerFake.setEnabled(false)
+                pointerMesh.position.copyFrom(hitInfo[0].pickedPoint);
+                pointerMat.emissiveColor = new BABYLON.Color3(1, 1, 1)
 
-        if (hitInfo.length) {
-            console.log(hitInfo[0].pickedMesh.name);
-            walkerSelection = hitInfo[0].pickedMesh.name;
-            pointerMesh.setEnabled(true);
-            pointerFake.setEnabled(false)
-            pointerMesh.position.copyFrom(hitInfo[0].pickedPoint);
-            pointerMat.albedoColor = new BABYLON.Color3(0, 0, 0)
+            } else {
+                walkerSelection = "";
+                //console.log("hitting nothing");
+                //pointerMesh.setEnabled(false);
+                pointerFake.setEnabled(true)
+                pointerMat.emissiveColor = new BABYLON.Color3.FromHexString("#ea1e1e")
+            }
 
-        } else {
-            walkerSelection = "";
-            //console.log("hitting nothing");
-            pointerMesh.setEnabled(false);
-            pointerFake.setEnabled(true)
         }
+
     });
 }
 
-function HandleViewProperties(){
-    if(scene.activeCamera == camera){
+function HandleViewProperties() {
+    if (scene.activeCamera == camera) {
         //reset view
         TravelRotateCamBack()
         RevealInfopoints(false)
         //enable back button
         //hide raycsting spheres
-        pointerMesh.setEnabled(false);
+        //pointerMesh.setEnabled(false);
         pointerFake.setEnabled(false)
         //unlock mouse: document.exitPointerLock()
         document.exitPointerLock()
+        //pulse animations reset
+        pulseHolder.forEach(elem => {
+            console.log(elem)
+            elem.scaling = new BABYLON.Vector3(1, 1, 1)
+        })
 
     }
-    else if(scene.activeCamera == walkerCam){
+    else if (scene.activeCamera == walkerCam) {
         //reset view
         RevealInfopoints(true, null)
         //unable backbutton
-        if($('.back-zoom').attr('class') == "back-zoom open"){
+        if ($('.back-zoom').attr('class') == "back-zoom open") {
             $('.back-zoom').removeClass('open')
         }
         //alert($('.back-zoom').attr('class'))

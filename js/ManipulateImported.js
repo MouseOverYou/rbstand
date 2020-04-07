@@ -1,4 +1,5 @@
 let hsHolder = []
+let pulseHolder = [];
 let LogosHolder = []
 let ArrowsHolder = []
 let overStation
@@ -117,6 +118,8 @@ function SpawnHotspots(){
             BABYLON.Tags.EnableFor(hsColl)
             BABYLON.Tags.AddTagsTo(hsColl, "hs_coll");
             hsHolder.push(clone);
+            console.log(elem.getChildMeshes(false)[3])
+            pulseHolder.push(elem.getChildMeshes(false)[3])
         }
         else if(elem.name.startsWith("Arrow_")){
             arrowCounter++;
@@ -150,7 +153,7 @@ function AllowMouseOverMesh(mesh){
         //mesh.material.emissiveColor = BABYLON.Color3.Blue();
         overStation = mesh.name.split('Arrow Collider ')[1];
         overStation = "arrow border " + overStation
-        console.log("mouse over " +  overStation)
+        //console.log("mouse over " +  overStation)
         scene.getMeshByName(overStation).material = arrowMatOn
 	}));
 	

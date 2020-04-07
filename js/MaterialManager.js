@@ -1,4 +1,6 @@
 var arrowGlowTex, arrowMatOff, arrowMatOn
+var iconGlassOn, iconGlassOff
+
 function ChangeMaterialProperties() {
 
     var redBay =new BABYLON.Color3.FromHexString("#ea1e1e");
@@ -66,6 +68,21 @@ function ChangeMaterialProperties() {
     arrowMatOn.emissiveTexture = arrowGlowTex
     arrowMatOn.metallic = 0.2
     arrowMatOn.roughness = 0.5
+
+    iconGlassOn = new BABYLON.PBRMaterial("iconGlassOn", scene)
+    iconGlassOn.albedoColor = redBay;
+    iconGlassOn.metallic = 0
+    iconGlassOn. roughness = 0.5
+    iconGlassOn.transparencyMode = 2
+    iconGlassOn.alpha = 0.85
+
+    iconGlassOff = new BABYLON.PBRMaterial("iconGlassOff", scene)
+    iconGlassOff.albedoColor = redBay;
+    iconGlassOff.metallic = 0
+    iconGlassOff. roughness = 0.5
+    iconGlassOff.transparencyMode = 2
+    iconGlassOff.alpha = 0.85
+
 
     /*
     var screenTex = new BABYLON.Texture("./assets/ascree.jpg", scene, true, false)
@@ -181,5 +198,6 @@ function ChangeMeshesMaterials(){
     scene.getMeshByName("arrow border 5").material = arrowMatOff
     scene.getMeshByName("arrow border 6").material = arrowMatOff
     scene.getMeshByName("arrow border 7").material = arrowMatOff
+
     
 } 
