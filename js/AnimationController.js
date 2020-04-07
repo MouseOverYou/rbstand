@@ -67,6 +67,10 @@ function TriggerLoopAnimations() {
         hsHolder.forEach(elem => {
             elem.rotation.y += 0.005;
         });
+        arrowGlowTex.uOffset += 0.01;
+        if(arrowGlowTex.uOffset > 0.5){
+            arrowGlowTex.uOffset = -0.5
+        }
     }
 
 }

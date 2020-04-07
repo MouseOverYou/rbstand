@@ -1,7 +1,8 @@
+var arrowGlowTex, arrowMatOff, arrowMatOn
 function ChangeMaterialProperties() {
 
-    var redBay =new BABYLON.Color3.FromHexString("#d8575");
-    var blueBay =new BABYLON.Color3.FromHexString("#0c83e2");
+    var redBay =new BABYLON.Color3.FromHexString("#ea1e1e");
+    var blueBay =new BABYLON.Color3.FromHexString("#063c9d");
     var lightGrayBay = new BABYLON.Color3.FromHexString("#eeeeee");
     var darkGrayBay = new BABYLON.Color3.FromHexString("#323334");
     var blackBay = new BABYLON.Color3.FromHexString("#000000");
@@ -47,6 +48,24 @@ function ChangeMaterialProperties() {
     scene.getMaterialByName("iconMatWhite").roughness = 1
     scene.getMaterialByName("iconMatRed").metallic = 1
     scene.getMaterialByName("iconMatRed").roughness = 1
+
+    arrowGlowTex = new BABYLON.Texture("./assets/arrow_glow.jpg", scene, true, false)
+    arrowGlowTex.wrapU = 1
+    arrowGlowTex.uOffset = 0.0
+    arrowGlowTex.level = 2
+
+    scene.getMaterialByName("recordbayMAt").albedoColor = blueBay
+    arrowMatOff = new BABYLON.PBRMaterial("arrowMatOff", scene)
+    arrowMatOff.albedoColor = blueBay
+    arrowMatOff.metallic = 0.2
+    arrowMatOff.roughness = 0.5
+
+    arrowMatOn = new BABYLON.PBRMaterial("arrowMatOn", scene)
+    arrowMatOn.albedoColor = blueBay
+    arrowMatOn.emissiveColor = blueBay
+    arrowMatOn.emissiveTexture = arrowGlowTex
+    arrowMatOn.metallic = 0.2
+    arrowMatOn.roughness = 0.5
 
     /*
     var screenTex = new BABYLON.Texture("./assets/ascree.jpg", scene, true, false)
@@ -155,4 +174,12 @@ function ChangeMeshesMaterials(){
     scene.getMeshByName("Screen_mitte_3").visibility = 0;
     scene.getMeshByName("Screen_mitte_4").visibility = 0;
     scene.getMeshByName("Video_Screens").material = mainScreenMat
+    scene.getMeshByName("arrow border 1").material = arrowMatOff
+    scene.getMeshByName("arrow border 2").material = arrowMatOff
+    scene.getMeshByName("arrow border 3").material = arrowMatOff
+    scene.getMeshByName("arrow border 4").material = arrowMatOff
+    scene.getMeshByName("arrow border 5").material = arrowMatOff
+    scene.getMeshByName("arrow border 6").material = arrowMatOff
+    scene.getMeshByName("arrow border 7").material = arrowMatOff
+    
 } 

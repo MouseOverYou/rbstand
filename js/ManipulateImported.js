@@ -1,6 +1,7 @@
 let hsHolder = []
 let LogosHolder = []
 let ArrowsHolder = []
+let overStation
 
 function ChangeRenderingOrder() {
     //for mesh "rendering order"
@@ -146,12 +147,18 @@ function AllowMouseOverMesh(mesh){
 	
 	//ON MOUSE ENTER
 	mesh.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPointerOverTrigger, function(ev){	
-		//mesh.material.emissiveColor = BABYLON.Color3.Blue();
+        //mesh.material.emissiveColor = BABYLON.Color3.Blue();
+        overStation = mesh.name.split('Arrow Collider ')[1];
+        overStation = "arrow border " + overStation
+        console.log("mouse over " +  overStation)
+        scene.getMeshByName(overStation).material = arrowMatOn
 	}));
 	
 	//ON MOUSE EXIT
 	mesh.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPointerOutTrigger, function(ev){
-		//mesh.material.emissiveColor = BABYLON.Color3.Black();
+        //mesh.material.emissiveColor = BABYLON.Color3.Black();
+        scene.getMeshByName(overStation).material = arrowMatOff
+        overStation = undefined;
 	}));
 }
 
