@@ -27,7 +27,6 @@ function close_video() {
 
 
 $(document).keyup(function (e) {
-  //ESC PRESSED
   if (e.keyCode === 27) { close_video(); }
 
   //R PRESSED
@@ -38,20 +37,16 @@ $(document).keyup(function (e) {
   }
   //1 PPRESSED -> walkercam
   else if (e.keyCode == 49) {
-    scene.activeCamera = walkerCam
-    canvas.requestPointerLock()
     document.getElementById("debugLabel").innerHTML = "Current Camera: First Person";
-    RevealInfopoints(true)
+    scene.activeCamera = walkerCam
+    HandleViewProperties()
   }
 
   //2 PPRESSED -> rotate camera
   else if (e.keyCode == 50) {
-    scene.activeCamera = camera;
-    document.exitPointerLock()
     document.getElementById("debugLabel").innerHTML = "Current Camera: Rotate Camera";
-    TravelRotateCamBack()
-    RevealInfopoints(false)
-
+    scene.activeCamera = camera;
+    HandleViewProperties()
   }
 
   // SPACE PRESSED -> 

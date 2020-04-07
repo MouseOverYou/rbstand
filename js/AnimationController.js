@@ -122,18 +122,29 @@ function closeInfoContent(){
 
 }
 
-function RevealInfopoints(state){
+function RevealInfopoints(state, selec){
     //if true show, else hide
     //To do: start animating by index of selected, only animate in when first time
     if(state){
-        window.setTimeout(()=>{
-            hsHolder.forEach(hs => {
-                infoReveal.fromTo(hs.scaling, {x:0, y:0, z: 0}, {x: 1, y:1, z:1, duration:0.3, ease:"back.inOut(4)"},">-0.2");
-            })
-        }, 500)
+        //alert(hsHolder[selec])
+        if(selec == null){
+            selec=0;
+        }
+
+        infoReveal.fromTo(hsHolder[selec].scaling, {x:0, y:0, z: 0}, {x: 1, y:1, z:1, delay: 1, duration:0.3, ease:"back"})
+        for(var i = 0; i < hsHolder.length; i++){
+            if( i == selec)
+                continue;
+            else{
+                console.log(i)
+                infoReveal.fromTo(hsHolder[i].scaling, {x:0, y:0, z: 0}, {x: 1, y:1, z:1, duration:0.3, ease:"back"},">-0.25")
+            }
+
+        }
     }
 
     else{
+        infoReveal.clear();
         hsHolder.forEach(hs => {
             infoReveal.fromTo(hs.scaling, {x: 1, y:1, z: 1}, {x: 0, y:0, z:0, duration:0.3, ease:"back.inOut(4)"},">-0.25");
         })
