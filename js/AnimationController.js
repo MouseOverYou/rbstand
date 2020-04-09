@@ -3,6 +3,7 @@ var startTween = gsap.timeline();
 var startCamTween = gsap.timeline();
 var infoReveal = gsap.timeline();
 var uiTween = gsap.timeline()
+var buttonTween = gsap.timeline();
 let origin = new BABYLON.Vector3(0, 0.26, 0);
 
 let pulseAnimRate = 1;
@@ -151,7 +152,7 @@ function RevealInfopoints(state, selec){
             if( i == selec)
                 continue;
             else{
-                console.log(i)
+                //console.log(i)
                 infoReveal.fromTo(hsHolder[i].scaling, {x:0, y:0, z: 0}, {x: 1, y:1, z:1, duration:0.3, ease:"back"},">-0.25")
             }
 
@@ -165,5 +166,15 @@ function RevealInfopoints(state, selec){
         })
     
     }
+}
+
+function BufferButtonAnimation(){
+    b_winkel.rotationQuaternion = null;
+    buttonTween.from(b_stehle.scaling, {x:1, y:0, z:1, ease: "back.out(2)", duration: 1});
+    buttonTween.from(b_winkel.scaling, {x:0, y:0, z:0, ease: "back.out(4)", duration: 0.75}, "<0.15");
+    buttonTween.fromTo(b_winkel.rotation, {x:0}, {x: 15* (Math.PI / 180), ease: "back", duration:0.5}, ">-0.2" );
+    buttonTween.from(b_press.position, {x:0, duration: 0.5}, ">-0.5")
+    buttonTween.from(b_press.scaling, {x:0, y: 0, z: 0, duration: 0.1}, "<0.2")
+    buttonTween.pause();
 }
 

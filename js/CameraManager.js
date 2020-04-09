@@ -1,4 +1,6 @@
-var walkerCam, ground, InfoColliders, arrowColliders, pointerMesh, pointerFake, isLocked
+var walkerCam, InfoColliders, arrowColliders, pointerMesh, pointerFake, isLocked
+let  collideButonNum =0
+let overButton = false;
 var walkerSelection;
 function SetupCameras(scene) {
     //collect infocolliders
@@ -74,7 +76,7 @@ function SetupCameras(scene) {
 
 function CreateWalkerColliders() {
     //Bounding box Geometry
-    ground = BABYLON.Mesh.CreateBox("ground", 1, scene);
+    var ground = BABYLON.Mesh.CreateBox("ground", 1, scene);
     ground.scaling = new BABYLON.Vector3(10, 0.1, 10);
     ground.position.y = -0.04;
     ground.checkCollisions = true;
@@ -87,7 +89,6 @@ function CreateWalkerColliders() {
     border0.position.y = 0.5
     border0.checkCollisions = true;
     border0.isVisible = false;
-
 
     var border1 = BABYLON.Mesh.CreateBox("border1", 1, scene);
     border1.scaling = new BABYLON.Vector3(0.1, 1, 5);
@@ -111,6 +112,12 @@ function CreateWalkerColliders() {
     border3.position.y = 0.5;
     border3.checkCollisions = true;
     border3.isVisible = false;
+
+    var standColl = BABYLON.Mesh.CreateBox("standColl", 1, scene);
+    standColl.scaling = new BABYLON.Vector3(0.05, 0.05, 0.05);
+    standColl.position = new BABYLON.Vector3(0.9, 0.2, 1.52)
+    standColl.checkCollisions = true;
+    standColl.isVisible = false;
 
 }
 
@@ -137,6 +144,15 @@ function CreateWalkerCam(scene) {
 
     //scene.activeCamera = walkerCam
     walkerCam.attachControl(canvas, true);
+    //scene.activeCamera = walkerCam
+
+    walkerCam.onCollide = function (mesh) {
+        if (mesh.name == "standColl") { //we can check if mesh is in pushable collection later
+            console.log("hitttt")
+            buttonTween.play()
+            collideButonNum++
+        }
+    };
 
 }
 
@@ -161,6 +177,7 @@ function jump(rate) {
 }
 
 function checkInfoHit() {
+    //info points check
     if (walkerSelection != "") {
 
         var walkerSelectionNum = walkerSelection.split('hs Collider ')[1];
@@ -169,7 +186,17 @@ function checkInfoHit() {
         document.exitPointerLock()
     }
     else {
-        console.log("nothing was hit")
+        console.log("no infopoint was hit")
+    }
+
+    //buttoncheck
+    if(overButton){
+        console.log("button pressed");
+        buttonTween.from(b_button.scaling, {x:1, y:0.5, z:1, ease: "power2.out", duration: 1});
+        defaultPipeline.chromaticAberrationEnabled =! defaultPipeline.chromaticAberrationEnabled;
+        defaultPipeline.chromaticAberration.aberrationAmount = 50
+        defaultPipeline.grainEnabled =! defaultPipeline.grainEnabled;
+        defaultPipeline.grain.animated =! defaultPipeline.grain.animated
     }
 }
 
@@ -223,6 +250,16 @@ function CreateRaycast(scene) {
                 pointerMat.emissiveColor = new BABYLON.Color3.FromHexString("#ea1e1e")
             }
 
+        }
+        var buttonHit = ray.intersectsMesh(b_button, true);
+        if(scene.activeCamera == walkerCam){
+            if (buttonHit.hit) {
+                overButton = true
+                console.log(buttonHit.pickedMesh.name);
+            }
+            else{
+                overButton = false;
+            } 
         }
 
     });

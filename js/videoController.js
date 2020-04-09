@@ -35,11 +35,24 @@ $(document).keyup(function (e) {
     //startTween.restart()
     startTween.restart();
   }
+  else if (e.keyCode == 51){
+    buttonTween.play();
+  }
+  else if (e.keyCode == 52){
+    buttonTween.reverse();
+  }
   //1 PPRESSED -> walkercam
   else if (e.keyCode == 49) {
     document.getElementById("debugLabel").innerHTML = "Current Camera: First Person";
     scene.activeCamera = walkerCam
     HandleViewProperties()
+    //button stuff
+    b_All.setEnabled(true)
+    b_stand.visibility = true;
+    b_press.visibility = true;
+    b_stehle.visibility = true;
+    b_winkel.setEnabled(true);
+
   }
 
   //2 PPRESSED -> rotate camera
@@ -52,6 +65,13 @@ $(document).keyup(function (e) {
       document.getElementById("debugLabel").innerHTML = "Current Camera: Rotate Camera";
       scene.activeCamera = camera;
       HandleViewProperties()
+      //button stuff
+  
+      b_All.setEnabled(false)
+      b_stand.visibility = false;
+      b_press.visibility = false;
+      b_stehle.visibility = false;
+      b_winkel.setEnabled(false);
     }
 
   }

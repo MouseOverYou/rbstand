@@ -3,6 +3,7 @@ let pulseHolder = [];
 let LogosHolder = []
 let ArrowsHolder = []
 let overStation
+let b_All, b_stand, b_press, b_winkel, b_stehle, b_button;
 
 function ChangeRenderingOrder() {
     //for mesh "rendering order"
@@ -140,6 +141,23 @@ function SpawnHotspots(){
         }
         else if(elem.name.startsWith("ref_Anchor_")){
             elem.visibility = false;
+        }
+        else if(elem.name == "stehle"){
+            //console.log(elem.parent)
+            b_All = elem.parent;
+
+            b_stand = elem.parent.getChildMeshes()[0];
+            b_press = elem.parent.getChildMeshes()[1];
+            b_winkel = elem.parent.getChildTransformNodes(true)[2]
+            b_button = b_winkel.getChildMeshes()[0]
+            b_button.isPickable = true
+            console.log(b_winkel)
+            b_stehle = elem;
+            b_All.setEnabled(false)
+            b_stand.visibility = false;
+            b_press.visibility = false;
+            b_stehle.visibility = false;
+            b_winkel.setEnabled(false);
         }
     });
 

@@ -13,6 +13,7 @@ function SetScene() {
     //CreateInfoBox();
     SceneStarted = true;
     BufferStartAnimation()
+    BufferButtonAnimation()
 
 }
 var lastSelected = ""

@@ -1,7 +1,7 @@
     // https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline
-
+var defaultPipeline;
     function PostEffects(scene){
-        var defaultPipeline = new BABYLON.DefaultRenderingPipeline(
+        defaultPipeline = new BABYLON.DefaultRenderingPipeline(
             "DefaultRenderingPipeline",
             true, // is HDR?
             scene,
@@ -69,7 +69,7 @@
             /* chromatic abberation */
             defaultPipeline.chromaticAberrationEnabled = false; // false by default
             if (defaultPipeline.chromaticAberrationEnabled) {
-                defaultPipeline.chromaticAberration.aberrationAmount = 30; // 30 by default
+                defaultPipeline.chromaticAberration.aberrationAmount = 50; // 30 by default
                 defaultPipeline.chromaticAberration.adaptScaleToCurrentViewport = false; // false by default
                 defaultPipeline.chromaticAberration.alphaMode = 0; // 0 by default
                 defaultPipeline.chromaticAberration.alwaysForcePOT = false; // false by default
@@ -101,8 +101,8 @@
             defaultPipeline.grainEnabled = false;
             if (defaultPipeline.grainEnabled) {
                 defaultPipeline.grain.adaptScaleToCurrentViewport = false; // false by default
-                defaultPipeline.grain.animated = false; // false by default
-                defaultPipeline.grain.intensity = 30; // 30 by default
+                defaultPipeline.grain.animated = true; // false by default
+                defaultPipeline.grain.intensity = 50; // 30 by default
             }
             /* MSAA */
             defaultPipeline.samples = 2; // 1 by default
