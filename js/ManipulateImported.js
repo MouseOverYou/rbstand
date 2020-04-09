@@ -118,7 +118,7 @@ function SpawnHotspots(){
             BABYLON.Tags.EnableFor(hsColl)
             BABYLON.Tags.AddTagsTo(hsColl, "hs_coll");
             hsHolder.push(clone);
-            console.log(elem.getChildMeshes(false)[3])
+            //console.log(elem.getChildMeshes(false)[3])
             pulseHolder.push(elem.getChildMeshes(false)[3])
         }
         else if(elem.name.startsWith("Arrow_")){

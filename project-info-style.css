@@ -94,9 +94,6 @@ body {
 	background-color: #d4d4d4;
 }
 
-
-
-
 .filmbox{
     width: 58%;
     height: 100%;
@@ -181,6 +178,9 @@ p{
     display: none;
 }
 
+#project-chatbot{
+    display: none;
+}
 
 
 /* Media/Responsive Anpassungen für schmale/kleine Devices */
@@ -200,7 +200,12 @@ p{
     margin-left: 0;
     margin-top: 2%;
     }
-     
+    
+    #typing-elem{
+        top: 42%;
+        left: 5.5%;
+        width: 70%;
+    }
 }
 
 

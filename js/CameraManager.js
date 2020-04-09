@@ -175,7 +175,7 @@ function checkInfoHit() {
 
 function CreateRaycast(scene) {
     InfoColliders = scene.getMeshesByTags("hs_coll")
-    console.log(InfoColliders)
+    //console.log(InfoColliders)
 
     pointerFake = BABYLON.MeshBuilder.CreateSphere('pointerFake', { diameter: .00075 }, scene);
     pointerFake.parent = walkerCam

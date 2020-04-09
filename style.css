@@ -40,6 +40,68 @@ body {
 .back-zoom.open {
   opacity: 1;
 }
+/* CHATBOT TEST*/
+.output{
+  background-color: #d85757;
+  position: relative;
+  margin:10px 35px;
+  width:70%;
+  height: 7%;
+	border-radius: 10px;
+  color:#fff;
+
+}
+
+  #container {
+  margin: 35px 35px 25px 35px;
+  background-color: #f0db4f;
+  justify-content: center;
+  margin-top: 0px;
+}
+
+.chat-text{
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 25px;
+  color: #ffffff; 
+  position: absolute;
+  margin-top: 0px;
+  left: 0px;
+  top: 4px;
+	/*margin:5px 10px 0;*/
+}
+
+.input-elem {
+  background-color: #0c83e2;
+  position: relative;
+  margin:10px 95px;
+  width:70%;
+  height: 7%;
+	border-radius: 10px;
+  color:#fff;
+}
+
+#typing-elem {
+  position: absolute;
+  background-color: #323334;
+  left: 3%;
+  top: 85%;
+  width:34%;
+  height: 7%;
+	border-radius: 10px;
+  color:#fff;
+}
+input{
+  background-color: #0c82e200;
+  margin:12px 15px;
+  color:#ffffff;
+}
+
+::placeholder {
+  color: #eeeeee;
+  opacity: 1; /* Firefox */
+}
 /*INFOBOXEN TEST*/
 .infobox {
   position: fixed;

@@ -25,8 +25,8 @@ function openInfoUI(selec){
     //handle infobox
     switch(selec){
         case "1":
-            document.getElementById("project-ssi-schaefer").style.display = "block";
-            lastSelected = document.getElementById("project-ssi-schaefer")
+            document.getElementById("project-chatbot").style.display = "block";
+            lastSelected = document.getElementById("project-chatbot")
             break;
         case "2":
             document.getElementById("project-ssi-schaefer").style.display = "block";

@@ -44,9 +44,16 @@ $(document).keyup(function (e) {
 
   //2 PPRESSED -> rotate camera
   else if (e.keyCode == 50) {
-    document.getElementById("debugLabel").innerHTML = "Current Camera: Rotate Camera";
-    scene.activeCamera = camera;
-    HandleViewProperties()
+    if(document.getElementsByClassName('bg-overlay')[0].className == 'bg-overlay open'){
+      console.log("bg is open")
+    }
+    else{
+      console.log('bg is close')
+      document.getElementById("debugLabel").innerHTML = "Current Camera: Rotate Camera";
+      scene.activeCamera = camera;
+      HandleViewProperties()
+    }
+
   }
 
   // SPACE PRESSED -> 
