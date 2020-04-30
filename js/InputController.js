@@ -109,8 +109,10 @@ $(document).keyup(function (e) {
   //if keypress "i"
 
   if (e.keyCode === 73) {
+    AddStreamingToTexture();
+    //console.log("i Keyboard")
     /*
-    console.log("i Keyboard")
+
     showInfo = !showInfo;
     if (showInfo) {
       show_Info_Overlay();

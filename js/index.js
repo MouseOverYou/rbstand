@@ -127,3 +127,10 @@ loadVideo();
 window.addEventListener("resize", function () {
     engine.resize();
 });
+
+/*
+TO DO:
+make classes of interactables
+make a funciton that saves all meshes that need to be manipulated some way
+
+*/

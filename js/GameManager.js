@@ -100,7 +100,7 @@ $('.project-overlay').on('click', function(e){
 
 
   });*/
-
+//old stuff
 function SpawnInfobox(mesh, cam) {
     //console.log("hast collider tag?")
     //console.log(BABYLON.Tags.MatchesQuery(mesh, "hs_coll"))
@@ -192,13 +192,5 @@ function CreateInfoBox() {
     videoCollider.parent = IBox_P;
     videoCollider.isPickable = true;
     BABYLON.Tags.AddTagsTo(videoCollider, "vid_coll");
-}
-
-function createUI() {
-    myGUI = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
-    createWinBtn(myGUI)
-    createLoseBtn(myGUI)
-    createRevealBtn(myGUI)
-    createRainButton(myGUI)
 }
 
